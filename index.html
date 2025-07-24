@@ -6,8 +6,8 @@
     <title>Markdown to HTML Converter</title>
     <!-- Tailwind CSS for UI styling -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Marked.js for Markdown to HTML conversion -->
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <!-- Marked.js for Markdown to HTML conversion (pinned to a specific version) -->
+    <script src="https://cdn.jsdelivr.net/npm/marked@5.1.2/lib/marked.umd.min.js"></script>
     <!-- Google Fonts for the UI -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -94,9 +94,9 @@
                         <button id="tab-upload" class="tab-inactive whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm">Upload File</button>
                     </nav>
                 </div>
-                
+
                 <div id="paste-area">
-                    <textarea id="markdown-input" class="w-full h-80 p-4 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 smooth-transition" placeholder="## Your Markdown Here..."></textarea>
+                    <textarea id="markdown-input" class="w-full h-80 p-4 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 smooth-transition" placeholder="# My Document Title&#10;&#10;This is the introduction.&#10;&#10;# First Chapter&#10;&#10;Content for the first chapter.&#10;&#10;# Second Chapter&#10;&#10;Content for the second chapter."></textarea>
                 </div>
                 <div id="upload-area" class="hidden">
                     <div class="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 dark:border-gray-100/25 px-6 py-10">
@@ -134,14 +134,14 @@
                         <button id="tab-code" class="tab-inactive whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm">HTML Code</button>
                     </nav>
                 </div>
-                
+
                 <div id="preview-container">
                     <iframe id="preview-frame" title="HTML Preview"></iframe>
                 </div>
                 <div id="code-container" class="hidden">
                     <pre><code id="html-output" class="language-html">Your generated HTML will appear here.</code></pre>
                 </div>
-                
+
                 <div class="mt-6 flex flex-col sm:flex-row gap-4">
                     <button id="copy-btn" class="btn btn-secondary flex-1">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
@@ -175,7 +175,7 @@
             const tabUpload = document.getElementById('tab-upload');
             const pasteArea = document.getElementById('paste-area');
             const uploadArea = document.getElementById('upload-area');
-            
+
             const tabPreview = document.getElementById('tab-preview');
             const tabCode = document.getElementById('tab-code');
             const previewContainer = document.getElementById('preview-container');
@@ -211,7 +211,7 @@
                     previewContainer.classList.add('hidden');
                 }
             }
-            
+
             tabPaste.addEventListener('click', () => switchInputTab('paste'));
             tabUpload.addEventListener('click', () => switchInputTab('upload'));
             tabPreview.addEventListener('click', () => switchOutputTab('preview'));
@@ -230,7 +230,7 @@
                     reader.readAsText(file);
                 }
             });
-            
+
             // --- Drag and Drop Logic ---
             const dropZone = document.querySelector('#upload-area .flex.justify-center');
             dropZone.addEventListener('dragover', (e) => {
@@ -275,8 +275,7 @@
                     alert('Nothing to copy. Please convert some Markdown first.');
                     return;
                 }
-                
-                // Use a temporary textarea to copy content
+
                 const tempTextArea = document.createElement('textarea');
                 tempTextArea.value = codeToCopy;
                 document.body.appendChild(tempTextArea);
@@ -303,8 +302,7 @@
                 const url = URL.createObjectURL(blob);
                 const a = document.createElement('a');
                 a.href = url;
-                
-                // Generate a filename from the first H1 tag or default
+
                 const titleMatch = currentMarkdown.match(/^#\s*(.*)/m);
                 const safeTitle = titleMatch ? titleMatch[1].trim().replace(/[^a-z0-9]/gi, '_').toLowerCase() : 'generated_page';
                 a.download = `${safeTitle}.html`;
@@ -315,16 +313,47 @@
                 URL.revokeObjectURL(url);
             });
 
-            // --- HTML Generation Function ---
+            // --- HTML Generation Function with Table of Contents ---
             function generateFullHtml(markdownContent) {
-                // Use marked.js to parse the markdown into an HTML fragment
-                const contentHtml = marked.parse(markdownContent);
-                
-                // Extract title from the first H1 tag, or use a default
-                const titleMatch = contentHtml.match(/<h1[^>]*>(.*?)<\/h1>/i);
-                const title = titleMatch ? titleMatch[1] : 'Generated Document';
+                // --- 1. Generate TOC data from H1 tags ---
+                const tokens = marked.lexer(markdownContent);
+                const slugger = new marked.Slugger();
+                const tocItems = [];
 
-                // CSS styles extracted from the user's example file for a beautiful output
+                tokens.forEach(token => {
+                    if (token.type === 'heading' && token.depth === 1) {
+                        // Clean the text for display in the TOC by removing markdown formatting
+                        const displayText = token.text.replace(/<[^>]*>?/gm, '').replace(/[*_~]/g, '').trim();
+                        // Use the raw text for slugging to match marked's default behavior
+                        const slug = slugger.slug(token.text);
+                        tocItems.push({
+                            text: displayText,
+                            slug: slug
+                        });
+                    }
+                });
+
+                // --- 2. Build TOC HTML string ---
+                let tocHtml = '';
+                // The first H1 is the title, subsequent H1s are chapters for the TOC
+                const tocChapters = tocItems.slice(1);
+                if (tocChapters.length > 0) {
+                    tocHtml = `
+    <nav id="table-of-contents">
+        <h2>Table of Contents</h2>
+        <ol>
+            ${tocChapters.map(item => `<li><a href="#${item.slug}">${item.text}</a></li>`).join('\n            ')}
+        </ol>
+    </nav>`;
+                }
+
+                // --- 3. Generate main content HTML (marked.js adds IDs to headings by default) ---
+                const contentHtml = marked.parse(markdownContent);
+
+                // --- 4. Extract page title from the first H1, or use a default ---
+                const pageTitle = tocItems.length > 0 ? tocItems[0].text : 'Generated Document';
+
+                // --- 5. Define CSS styles for the generated page ---
                 const styles = `
         :root {
             --bg-color: #f9f9f9;
@@ -348,6 +377,11 @@
                 --header-bg: #1e1e1e;
                 --blockquote-bg: #2a2a2a;
             }
+        }
+
+        /* Add smooth scrolling for anchor links */
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
@@ -380,7 +414,7 @@
             margin-bottom: 2rem;
             border-bottom: none;
         }
-        
+
         h2 {
             font-size: 2rem;
             padding-bottom: 0.5rem;
@@ -412,19 +446,19 @@
             background-color: var(--blockquote-bg);
             border-radius: 4px;
         }
-        
+
         hr {
             border: 0;
             height: 1px;
             background: var(--border-color);
             margin: 3rem 0;
         }
-        
+
         ul, ol {
             padding-left: 2rem;
             margin-bottom: 1.5rem;
         }
-        
+
         li {
             margin-bottom: 0.5rem;
         }
@@ -463,32 +497,61 @@
             border-collapse: collapse;
             margin: 2rem 0;
         }
-        
+
         th, td {
             border: 1px solid var(--border-color);
             padding: 0.75rem;
             text-align: left;
         }
-        
+
         th {
             background-color: var(--blockquote-bg);
             font-family: 'Inter', sans-serif;
         }
 
+        /* Table of Contents Styling */
+        #table-of-contents {
+            background-color: var(--header-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem 2rem;
+            margin: 2rem auto;
+            max-width: 70ch;
+        }
+
+        #table-of-contents h2 {
+            margin-top: 0;
+            border-bottom: none;
+            font-size: 1.5rem;
+            text-align: left; /* Override any global centered h2 styles */
+        }
+
+        #table-of-contents ol {
+            padding-left: 20px;
+            margin: 0;
+            list-style-type: decimal;
+        }
+
+        #table-of-contents li {
+            font-family: 'Inter', sans-serif;
+            padding: 0.5rem 0;
+            font-size: 1.1rem;
+        }
+
         @media (max-width: 768px) {
             h1 { font-size: 2.2rem; }
             h2 { font-size: 1.8rem; }
-            main { padding: 0 1rem; margin: 1rem auto; }
+            main, #table-of-contents { padding: 0 1rem; margin: 1rem auto; }
         }
                 `;
 
-                // Return the complete HTML document as a string
+                // --- 6. Return the complete HTML document as a string ---
                 return `<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${title}</title>
+    <title>${pageTitle}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
@@ -497,6 +560,7 @@
     </style>
 </head>
 <body>
+    ${tocHtml}
     <main>
         ${contentHtml}
     </main>
