@@ -1,0 +1,1443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPM (Reps Per Minute) Program: LLM Reference Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        
+        :root {
+            --bg-color: #f9f9f9;
+            --text-color: #333333;
+            --heading-color: #111111;
+            --accent-color: #007bff;
+            --accent-hover-color: #0056b3;
+            --border-color: #dddddd;
+            --header-bg: #ffffff;
+            --blockquote-bg: #f0f0f0;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --heading-color: #ffffff;
+                --accent-color: #4dabf7;
+                --accent-hover-color: #82c9ff;
+                --border-color: #444444;
+                --header-bg: #1e1e1e;
+                --blockquote-bg: #2a2a2a;
+            }
+        }
+
+        /* Add smooth scrolling for anchor links */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Lora', serif;
+            line-height: 1.7;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        main {
+            max-width: 70ch;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Inter', sans-serif;
+            color: var(--heading-color);
+            line-height: 1.3;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            border-bottom: none;
+        }
+
+        h2 {
+            font-size: 2rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        a:hover {
+            color: var(--accent-hover-color);
+            text-decoration: underline;
+        }
+
+        blockquote {
+            border-left: 4px solid var(--accent-color);
+            padding: 1rem 1.5rem;
+            margin: 2rem 0;
+            font-style: italic;
+            color: var(--text-color);
+            background-color: var(--blockquote-bg);
+            border-radius: 4px;
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background: var(--border-color);
+            margin: 3rem 0;
+        }
+
+        ul, ol {
+            padding-left: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        code {
+            background-color: var(--blockquote-bg);
+            padding: 0.2em 0.4em;
+            margin: 0;
+            font-size: 85%;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+
+        pre {
+            background-color: var(--blockquote-bg);
+            padding: 1rem;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 2rem auto;
+            display: block;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+        }
+
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 0.75rem;
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--blockquote-bg);
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Table of Contents Styling */
+        #table-of-contents {
+            background-color: var(--header-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem 2rem;
+            margin: 2rem auto;
+            max-width: 70ch;
+        }
+
+        #table-of-contents h2 {
+            margin-top: 0;
+            border-bottom: none;
+            font-size: 1.5rem;
+            text-align: left; /* Override any global centered h2 styles */
+        }
+
+        #table-of-contents ol {
+            padding-left: 20px;
+            margin: 0;
+            list-style-type: decimal;
+        }
+
+        #table-of-contents li {
+            font-family: 'Inter', sans-serif;
+            padding: 0.5rem 0;
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.2rem; }
+            h2 { font-size: 1.8rem; }
+            main, #table-of-contents { padding: 0 1rem; margin: 1rem auto; }
+        }
+                
+    </style>
+</head>
+<body>
+    
+    <nav id="table-of-contents">
+        <h2>Table of Contents</h2>
+        <ol>
+            <li><a href="#alsruhe-rpm-program">Alsruhe RPM Program</a></li>
+        </ol>
+    </nav>
+    <main>
+        <p>Here is a RAG reference document for an LLM-powered tool tasked with generating customized RPM workouts and programs. This document contains all the necessary information, explained in detail, as the LLM will not have access to the original source materials.</p>
+<hr>
+<h1 id="rpm-reps-per-minute-program-llm-reference-document">RPM (Reps Per Minute) Program: LLM Reference Document</h1>
+<p>This document provides a comprehensive overview of the Brian Alsruhe&#39;s Reps Per Minute (RPM) program, designed to enable an LLM to generate customized workouts and full programs based on user requests.</p>
+<h2 id="1-program-overview">1. Program Overview</h2>
+<p>The RPM program is a 9-week, <strong>full-body strength and conditioning program</strong> specifically designed to be run in a <strong>caloric deficit</strong>. Its primary goals are to <strong>burn body fat, build work capacity, and enhance technical proficiency</strong>. Unlike programs focused solely on maximizing strength, RPM aims to make the user <strong>leaner, more athletic, and explosive</strong>.</p>
+<p>It is structured to be <strong>less physically demanding on the central nervous system (CNS) and spine</strong> than heavier programs, making it an excellent <strong>&quot;bridge program&quot;</strong> between more intense training cycles. It is also highly suitable for individuals with <strong>less time for the gym</strong> as each session is efficient and time-bound.</p>
+<p>The core principle is <strong>&quot;Reps Per Minute&quot;</strong> (RPM), where every second in the program is &quot;on the clock,&quot; making the clock a &quot;brutal coach&quot;.</p>
+<h2 id="2-key-principles-and-mechanics">2. Key Principles and Mechanics</h2>
+<h3 id="21-every-minute-on-the-minute-emom-style">2.1. &quot;Every Minute on the Minute&quot; (EMOM) Style</h3>
+<p>The vast majority of this program is run in an <strong>&quot;Every Minute on the Minute&quot; (EMOM) style</strong>.</p>
+<ul>
+<li>The user will need a <strong>timer or clock</strong> to watch.</li>
+<li><strong>At the start of every new minute</strong>, the user begins their set for a prescribed number of repetitions and then rests for the remainder of that minute.</li>
+<li><strong>Faster completion of reps</strong> means more rest time within the minute.</li>
+<li>The clock creates a sense of urgency and forces the user to <strong>&quot;answer the bell&quot;</strong> at the start of each new minute, promoting mental toughness and discouraging quitting. This repetitive decision-making (to persevere or quit) is highlighted as a habit-forming process that can bleed into other areas of life.</li>
+</ul>
+<h3 id="22-full-body-training">2.2. Full-Body Training</h3>
+<ul>
+<li>The RPM program is the creator&#39;s <strong>first full-body program</strong>.</li>
+<li>Each training session covers the <strong>entire body</strong>.</li>
+<li>This approach is specifically chosen for the program&#39;s goals, as it allows for <strong>better work capacity development</strong> and provides a <strong>CNS and spine break</strong> from constant heavy loading.</li>
+<li>It also means that if a day is missed, it&#39;s &quot;not a big deal&quot; because the entire body is worked multiple times a week.</li>
+</ul>
+<h3 id="23-intensity-and-percentage-guidelines-hlm---heavy-light-medium">2.3. Intensity and Percentage Guidelines (HLM - Heavy, Light, Medium)</h3>
+<p>The program utilizes an <strong>undulating intensity</strong> throughout the week and within each daily session. This means the user is &quot;never going to be completely punishing&quot; themselves on any single day.</p>
+<p>Intensities are categorized as Heavy, Light, or Medium (HLM) and are based on percentages of the user&#39;s <strong>1 Repetition Maximum (1RM)</strong>. The percentages and corresponding rep ranges <strong>increase across the three 3-week waves</strong>.</p>
+<p>Here&#39;s how HLM intensities translate to percentages and rep ranges per wave:</p>
+<ul>
+<li><p><strong>Wave 1 (Weeks 1-3):</strong></p>
+<ul>
+<li><strong>Light:</strong> 40% of 1RM for <strong>5-6 reps</strong> per minute</li>
+<li><strong>Medium:</strong> 50% of 1RM for <strong>4-5 reps</strong> per minute</li>
+<li><strong>Heavy:</strong> 60% of 1RM for <strong>3-4 reps</strong> per minute</li>
+</ul>
+</li>
+<li><p><strong>Wave 2 (Weeks 4-6):</strong></p>
+<ul>
+<li><strong>Light:</strong> 45% of 1RM for <strong>5-6 reps</strong> per minute</li>
+<li><strong>Medium:</strong> 55% of 1RM for <strong>4-5 reps</strong> per minute</li>
+<li><strong>Heavy:</strong> 65% of 1RM for <strong>3-4 reps</strong> per minute</li>
+</ul>
+</li>
+<li><p><strong>Wave 3 (Weeks 7-9):</strong></p>
+<ul>
+<li><strong>Light:</strong> 50% of 1RM for <strong>5-6 reps</strong> per minute</li>
+<li><strong>Medium:</strong> 60% of 1RM for <strong>4-5 reps</strong> per minute</li>
+<li><strong>Heavy:</strong> 70% of 1RM for <strong>2-3 reps</strong> per minute (Note: The source text for Wave 3 percentages has a slight discrepancy with the actual table provided, where it states &quot;70% you&#39;re only looking at two three reps&quot; while the table shows 70% for 2-3 reps for Heavy. The table values are more consistent with the progression for the Heavy category.)</li>
+</ul>
+</li>
+<li><p><strong>Note on Percentage Progression:</strong> Each wave generally increases the percentage by <strong>5%</strong> for each intensity level, while the rep ranges for Light, Medium, and Heavy largely remain consistent with the initial guidelines (except for the Heavy category in Wave 3). The maximum intensity reached is around <strong>70-75%</strong> over the entire program.</p>
+</li>
+</ul>
+<h3 id="24-autoregulation">2.4. Autoregulation</h3>
+<p>The program incorporates <strong>autoregulation</strong>, allowing users to adjust the workout based on their feeling and performance.</p>
+<ul>
+<li>The rep ranges (e.g., 5-6 reps) provide flexibility: if feeling good, aim for the higher end; if struggling, stick to the lower end.</li>
+<li>If a set feels <strong>too easy</strong>, users can <strong>increase the weight</strong> within the 10-minute block or <strong>add extra core or conditioning exercises</strong> <em>after</em> completing the main mover reps for that minute. This drastically changes things by increasing workload and decreasing rest.</li>
+<li>If a set feels <strong>too heavy</strong> or the user is running out of time, they should <strong>drop the reps back</strong> or decrease the weight.</li>
+</ul>
+<h3 id="25-emphasis-on-form-and-bar-speed">2.5. Emphasis on Form and Bar Speed</h3>
+<ul>
+<li>The program emphasizes <strong>technical proficiency and explosiveness</strong>.</li>
+<li>Users are instructed to <strong>&quot;Never sacrifice FORM for SPEED and never sacrifice SPEED for WEIGHT&quot;</strong>.</li>
+<li>The goal is to <strong>ingrain good reps</strong>, ensuring &quot;every rep you perform is a good one&quot;.</li>
+<li>The lighter nature of the program allows for intense focus on technique without excessive worry about injury.</li>
+</ul>
+<h3 id="26-variation-utilization">2.6. Variation Utilization</h3>
+<ul>
+<li>The program includes a variety of lifts and variations to <strong>address common weaknesses</strong> in main movers and keep the program engaging.</li>
+<li>Users are given the option to choose variations or stick to conventional lifts, especially if they are powerlifters.</li>
+<li><strong>Determining Weight for Variations without a 1RM:</strong> If a user doesn&#39;t know their 1RM for a specific variation (e.g., Floor Press), they should use the 10-minute block in a <strong>&quot;ramping fashion&quot;</strong>.<ul>
+<li>Start with a lighter weight and <strong>gradually add weight each minute</strong> as long as good form is maintained and bar speed doesn&#39;t slow unacceptably.</li>
+<li>Once an appropriate weight is found, the user can <strong>stay with it</strong> for the remainder of the sets or continue to manipulate it based on energy levels.</li>
+<li>After a week or two, the user should have a good idea of their 1RM for that variation.</li>
+</ul>
+</li>
+</ul>
+<h3 id="27-recovery">2.7. Recovery</h3>
+<ul>
+<li>While 24-48 hours between barbell sessions is encouraged, RPM is described as the <strong>least physically demanding</strong> of the creator&#39;s programs.</li>
+<li>Recovery is &quot;slightly less of a priority,&quot; allowing for <strong>harder active recovery, supplementary sandbag sessions, or side sports</strong> without significant negative effects.</li>
+</ul>
+<h2 id="3-program-structure-details">3. Program Structure Details</h2>
+<p>The RPM program is <strong>9 weeks long</strong>, divided into <strong>three 3-week waves</strong>. It is performed <strong>4 times per week</strong>, with each session consisting of <strong>40 minutes of actual work</strong>.</p>
+<p>Each daily session is broken down into <strong>four 10-minute blocks</strong>, totaling 40 minutes of work. The amount of time spent warming up or &quot;messing around&quot; will determine the total gym time, but it can easily be done in 50-60 minutes.</p>
+<p>The four 10-minute blocks typically cover:</p>
+<ol>
+<li><strong>Lower Body Focus:</strong> Deadlifts, Squats, or variations</li>
+<li><strong>Back Focus:</strong> Rows, Pull-ups, Carries, or Loads</li>
+<li><strong>Press Focus (Upper Body):</strong> Overhead Press (vertical) or Bench Press (horizontal) or variations</li>
+<li><strong>Core or Conditioning Focus:</strong> Abdominal work, conditioning exercises, or a combination</li>
+</ol>
+<p>The intensities (Heavy, Light, Medium) for these focus areas undulate throughout the week to ensure varied stimulus and recovery. For example, if deadlifts are heavy on Day 1, squats might be light on Day 2, and the <em>next time</em> deadlifts appear in the week (e.g., Day 3), their intensity will be different (e.g., medium).</p>
+<h3 id="31-example-weekly-layout-block-1--week-1--day-1-4">3.1. Example Weekly Layout (Block 1 / Week 1 / Day 1-4)</h3>
+<p>The &quot;alsruheRPMcustom.txt&quot; source provides a structured example for Wave 1, and the &quot;RPM-Reps+Per+Minute.pdf&quot; provides a detailed Block 1 for weeks 1-3. Here&#39;s a breakdown of the typical structure and examples of exercises:</p>
+<h4 id="week-1--day-1">Week 1 / Day 1</h4>
+<ul>
+<li><strong>Lower Body Focus:</strong> Conventional Deadlifts (Heavy, 60-65% for 3-4 reps)</li>
+<li><strong>Back Focus (Carry Event):</strong> Farmer’s Walk (Light, 40-45% of 50ft max for 150ft carry) (Can be replaced with deadlift or row variation if carrying isn&#39;t possible)</li>
+<li><strong>Vertical Press Focus:</strong> Strict Press (Medium, 50-55% for 4-5 reps)</li>
+<li><strong>Assistance Focus (Core):</strong> Hanging Leg Raises / Knee Raises (Odd Minutes: 3-5 C2B Chin-Ups or 10-15 Inverted Rows; Even Minutes: 5 Hanging Leg Raises/Knee Raises)</li>
+</ul>
+<h4 id="week-1--day-2">Week 1 / Day 2</h4>
+<ul>
+<li><strong>Lower Body Focus:</strong> Squats (High Bar or Low Bar) (Light, 40-45% for 5-6 reps)</li>
+<li><strong>Back Focus:</strong> Pendlay Rows (Medium, 50-55% for 4-5 reps)</li>
+<li><strong>Horizontal Press Focus:</strong> Bench Press (Heavy, 60-65% for 3-4 reps)</li>
+<li><strong>Conditioning Focus:</strong> Burpees &amp; Squats (3-5 Burpees, 10 Prisoner Squats)</li>
+</ul>
+<h4 id="week-1--day-3">Week 1 / Day 3</h4>
+<ul>
+<li><strong>Lower Body Focus:</strong> Stiff Leg or Romanian Deadlifts (Medium, 50-55% for 4-5 reps) (Often a variation of Day 1&#39;s main lift to target weak points)</li>
+<li><strong>Back Focus:</strong> Weighted Pull-Ups (Heavy, 60-65% for 3-4 reps)</li>
+<li><strong>Vertical Press Focus:</strong> “Z” Press (Light, 40-45% for 5-6 reps) (Often a variation of Day 1&#39;s main press)</li>
+<li><strong>Assistance Focus (Core):</strong> Dumbbell Russian Twists &amp; Rows (Odd Minutes: 7 Weighted Russian Twists; Even Minutes: 8 Single Arm DB Rows)</li>
+</ul>
+<h4 id="week-1--day-4">Week 1 / Day 4</h4>
+<ul>
+<li><strong>Lower Body Focus:</strong> Front Squats or Zercher Squats (Heavy, 60-65% for 3-4 reps) (Often a variation of Day 2&#39;s main lift to target weak points)</li>
+<li><strong>Back Focus (Load Event):</strong> Sandbag, Keg, Stone, etc. Loads or Extensions (Light, 40-45% for 5-6 reps) (Can be replaced with squat or row variation if loading isn&#39;t possible)</li>
+<li><strong>Horizontal Press Focus:</strong> Floor Press (Medium, 50-55% for 4-5 reps) (Often a variation of Day 2&#39;s main press)</li>
+<li><strong>Conditioning Focus:</strong> Dumbbell ManMakers or Devil Presses (3 ManMakers or 5 Devil Presses)</li>
+</ul>
+<h3 id="32-exercise-variations-and-examples-from-the-program">3.2. Exercise Variations and Examples from the Program</h3>
+<p>The program incorporates a wide range of exercises. Here are examples for each focus area from the detailed program structure:</p>
+<ul>
+<li><p><strong>Lower Body:</strong></p>
+<ul>
+<li>Conventional Deadlifts</li>
+<li>Squats (High Bar or Low Bar)</li>
+<li>Stiff Leg or Romanian Deadlifts</li>
+<li>Front Squats or Zercher Squats</li>
+<li>Pause Deadlifts (2&quot; Off Ground)</li>
+<li>Pin Squat (Pin Set at bottom)</li>
+<li>Block Pulls or Rack Deadlifts</li>
+<li>Pause Squats</li>
+<li>Deficit Deadlifts</li>
+<li>Box Squats</li>
+<li>Snatch Grip Deadlifts</li>
+<li>Bulgarian Split Squats</li>
+</ul>
+</li>
+<li><p><strong>Back (Pulls, Carries, Loads):</strong></p>
+<ul>
+<li>Farmer’s Walk</li>
+<li>Pendlay Rows</li>
+<li>Weighted Pull-Ups (or Pull-Downs)</li>
+<li>Sandbag/Keg/Stone/Plate/Medicine Ball/Odd Object Front Carry</li>
+<li>Cheat Barbell Rows</li>
+<li>Weighted Chin-Ups (or Pull-Downs)</li>
+<li>Reps to Shoulder (Load)</li>
+<li>Dumbbell Rows</li>
+<li>Loads or Extensions (Over a bar or onto a platform)</li>
+</ul>
+</li>
+<li><p><strong>Press (Upper Body - Vertical &amp; Horizontal):</strong></p>
+<ul>
+<li>Strict Press</li>
+<li>Bench Press</li>
+<li>“Z” Press</li>
+<li>Floor Press</li>
+<li>Push Press</li>
+<li>Pause Bench Press</li>
+<li>Pin Press (Pins just above Eye Level)</li>
+<li>Close Grip Bench Press</li>
+<li>“Z” Pin Press</li>
+<li>Pin Bench Press (Pin at Sticking Point)</li>
+<li>Push Jerk or Split Jerk</li>
+<li>JM Press or Larson Presses</li>
+</ul>
+</li>
+<li><p><strong>Core / Assistance / Conditioning:</strong></p>
+<ul>
+<li>Hanging Leg Raises / Knee Raises</li>
+<li>Burpees &amp; Prisoner Squats</li>
+<li>Dumbbell Russian Twists &amp; Single Arm Dumbbell Rows</li>
+<li>Dumbbell ManMakers or Devil Presses</li>
+<li>Hollow Rocks &amp; Dips/Push-Ups</li>
+<li>Pull-Ups / Inverted Rows / Hand Release Push-Ups / Jumping Squats (conditioning)</li>
+<li>Waiter’s Walk / Inverted Rows (Assistance)</li>
+<li>Planks (including 10 Minute Plank Challenge)</li>
+<li>Medicine Ball Slams</li>
+<li>Tabatas (Plate Halos, Plate Russian Twists, V-Sit-Ups, Flutter Kicks, Dead Bugs)</li>
+<li>Legs Conditioning (Lunges, Jumping Lunges, Squats, Jumping Squats)</li>
+<li>Lats Barbell Rows &amp; Burpee Lateral Jumps (Assistance Finisher)</li>
+<li>Push-Up Challenge</li>
+<li>Bring Sally Up (Bodyweight Exercise Challenge)</li>
+<li>Cable Wood Chops / Barbell Full Contact Twists / Barbell Overhead Side Bands</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-target-audience-and-use-cases">4. Target Audience and Use Cases</h2>
+<p>The RPM program is designed for:</p>
+<ul>
+<li>Individuals looking to <strong>lose body fat</strong> and get <strong>leaner</strong>.</li>
+<li>Those aiming to <strong>build work capacity</strong> and <strong>improve conditioning</strong>.</li>
+<li>Athletes wanting to <strong>enhance technical proficiency and bar speed</strong> in their lifts.</li>
+<li>People seeking a <strong>&quot;bridge program&quot;</strong> to recover their CNS and spine after an intense, heavy training cycle, before transitioning to another heavy program.</li>
+<li>Individuals with <strong>limited time for gym sessions</strong> who need efficient, impactful workouts.</li>
+<li>Those who want to be <strong>bigger, faster, stronger, and more conditioned</strong> without necessarily pursuing world-champion powerlifting or strongman goals. It&#39;s about overall well-rounded fitness, &quot;superhero type of training&quot;.</li>
+<li>Users interested in exploring and <strong>finding PRs for various lifting variations</strong> in a fun and engaging way.</li>
+</ul>
+<p><strong>It is NOT for:</strong> individuals specifically aiming to add huge amounts to their 1RM (e.g., taking a 700lb deadlift to 750lb), as its focus is broader than pure maximal strength.</p>
+<h2 id="5-important-considerations-for-customization">5. Important Considerations for Customization</h2>
+<p>When generating RPM customized workouts or programs, the LLM should adhere to these principles:</p>
+<ul>
+<li><strong>Adherence to EMOM Structure:</strong> Every set must be &quot;Every Minute on the Minute&quot; for 10 minutes per block.</li>
+<li><strong>Intensity Undulation:</strong> Ensure that the HLM (Heavy, Light, Medium) intensities are varied across the week and within each day, as specified in the program structure (e.g., if a Deadlift is Heavy on Day 1, the Squat on Day 2 should be Light, and the next Deadlift variation on Day 3 would be Medium).</li>
+<li><strong>Correct Percentage and Rep Range Application:</strong> Use the HLM percentages and rep ranges corresponding to the correct wave (Wave 1: 40-50-60%, Wave 2: 45-55-65%, Wave 3: 50-60-70% with adjusted reps for heavy).</li>
+<li><strong>Exercise Selection:</strong><ul>
+<li>Each day must include a <strong>Lower Body, Back, and Press (Vertical or Horizontal) focus</strong>.</li>
+<li>Odd days typically end with <strong>Core/Assistance</strong>, while even days end with <strong>Conditioning</strong>.</li>
+<li>When suggesting variations, explain that they target common weaknesses or offer more fun, and how to auto-regulate the weight if a 1RM is unknown (ramping).</li>
+<li>If suggesting specific exercises, ensure they align with the program&#39;s examples (e.g., for &quot;Load Focus,&quot; suggest a Sandbag Carry or a Stone Load, or offer a squat/row alternative if equipment is an issue).</li>
+</ul>
+</li>
+<li><strong>Autoregulation Options:</strong> Always include the option for the user to <strong>add extra core/conditioning exercises</strong> after the main mover within the minute if the prescribed work feels too easy. Emphasize that these additions should be done <em>after</em> the main lift.</li>
+<li><strong>Form Over Weight/Speed:</strong> Remind the user about the importance of <strong>good form and maintaining bar speed</strong>, never sacrificing either for weight or speed.</li>
+<li><strong>Mental Aspect Integration:</strong> Encourage perseverance and emphasize the &quot;answer the bell&quot; mentality.</li>
+</ul>
+<h2 id="sample-custom-program">Sample Custom Program</h2>
+<h1 id="alsruhe-rpm-program">Alsruhe RPM Program</h1>
+<h2 id="wave-1-weeks-1-3">Wave 1 (Weeks 1-3)</h2>
+<p><strong>Percentages and Reps:</strong></p>
+<ul>
+<li><strong>Light:</strong> 40% for 5-6 reps.</li>
+<li><strong>Medium:</strong> 50% for 4-5 reps.</li>
+<li><strong>Heavy:</strong> 60% for 3-4 reps.</li>
+</ul>
+<h3 id="week-1">Week 1</h3>
+<table>
+<thead>
+<tr>
+<th align="left">Day</th>
+<th align="left">HLM</th>
+<th align="left">Exercise</th>
+<th align="left">Pct</th>
+<th align="left">Reps</th>
+<th align="left">Core/Conditioning Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">1</td>
+<td align="left">Heavy</td>
+<td align="left">Conventional Deadlifts</td>
+<td align="left">60-65%</td>
+<td align="left">3-4</td>
+<td align="left"><strong>Assistance Focus:</strong> Hanging Leg Raises or Knee Raises. Odd Minutes: 3-5 Chest to Bar Chin-Ups or 10-15 Inverted Rows. Even Minutes: 5 Hanging Leg Raises or Knee Raises.</td>
+</tr>
+<tr>
+<td align="left">1</td>
+<td align="left">Light</td>
+<td align="left">Farmer&#39;s Walk</td>
+<td align="left">40-45%</td>
+<td align="left">150 ft</td>
+<td align="left"><em>Replace with Deadlift or Row variation if not possible, using same reps &amp; intensity.</em></td>
+</tr>
+<tr>
+<td align="left">1</td>
+<td align="left">Medium</td>
+<td align="left">Strict Press</td>
+<td align="left">50-55%</td>
+<td align="left">4-5</td>
+<td align="left"><em>Add an Ab/Oblique Exercise during the remainder of the minute if desired.</em></td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left">Light</td>
+<td align="left">Squats (High Bar/Low Bar)</td>
+<td align="left">40-45%</td>
+<td align="left">5-6</td>
+<td align="left"><strong>Conditioning Focus:</strong> Burpees &amp; Squats. Perform 3-5 Burpees and 10 Prisoner Squats. <em>Add an Ab/Oblique Exercise or Floor Presses/Single Arm DB Rows during remainder of minute if too easy.</em></td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left">Medium</td>
+<td align="left">Pendlay Rows</td>
+<td align="left">50-55%</td>
+<td align="left">4-5</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left">Heavy</td>
+<td align="left">Bench Press</td>
+<td align="left">60-65%</td>
+<td align="left">3-4</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left">Medium</td>
+<td align="left">Stiff Leg or Romanian DLs</td>
+<td align="left">50-55%</td>
+<td align="left">4-5</td>
+<td align="left"><strong>Assistance Focus:</strong> Dumbbell Russian Twists &amp; Rows. Odd Minutes: 7 Weighted Russian Twists (Each Side). Even Minutes: 8 Single Arm Dumbbell Rows (Each Side).</td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left">Heavy</td>
+<td align="left">Weighted Pull-Ups</td>
+<td align="left">60-65%</td>
+<td align="left">3-4</td>
+<td align="left"><em>Add Push-Ups during remainder of minute if desired.</em></td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left">Light</td>
+<td align="left">&quot;Z&quot; Press</td>
+<td align="left">40-45%</td>
+<td align="left">5-6</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">4</td>
+<td align="left">Heavy</td>
+<td align="left">Front Squats or Zercher</td>
+<td align="left">60-65%</td>
+<td align="left">3-4</td>
+<td align="left"><strong>Conditioning Focus:</strong> Dumbbell ManMakers or Devil Presses. Perform 3 Dumbbell ManMakers or 5 Dumbbell Devil Presses.</td>
+</tr>
+<tr>
+<td align="left">4</td>
+<td align="left">Light</td>
+<td align="left">Sandbag/Keg/Stone Load</td>
+<td align="left">40-45%</td>
+<td align="left">5-6</td>
+<td align="left"><em>Replace with Squat or Row variation if not possible.</em></td>
+</tr>
+<tr>
+<td align="left">4</td>
+<td align="left">Medium</td>
+<td align="left">Floor Press</td>
+<td align="left">50-55%</td>
+<td align="left">4-5</td>
+<td align="left"></td>
+</tr>
+</tbody></table>
+<h3 id="week-2">Week 2</h3>
+<table>
+<thead>
+<tr>
+<th align="left">Day</th>
+<th align="left">HLM</th>
+<th align="left">Exercise</th>
+<th align="left">Pct</th>
+<th align="left">Reps</th>
+<th align="left">Core/Conditioning Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">1</td>
+<td align="left">Light</td>
+<td align="left">Pause Deadlifts (2&quot; Off Ground)</td>
+<td align="left">40-45%</td>
+<td align="left">5-6</td>
+<td align="left"><strong>Assistance Focus:</strong> Hollow Rocks &amp; Dips/Push-Ups. :20 Seconds Hollow Rocks, :20 Seconds Dips or Deficit Push-Ups, :20 Seconds Rest.</td>
+</tr>
+<tr>
+<td align="left">1</td>
+<td align="left">Medium</td>
+<td align="left">Front Carry (Sandbag/Keg/Stone)</td>
+<td align="left">50-55%</td>
+<td align="left">100 ft</td>
+<td align="left"><em>Replace with marching in place or Deadlift/Row variation if not possible.</em></td>
+</tr>
+<tr>
+<td align="left">1</td>
+<td align="left">Heavy</td>
+<td align="left">Push Press</td>
+<td align="left">60-65%</td>
+<td align="left">3-4</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left">Medium</td>
+<td align="left">Pin Squat (Pin at bottom)</td>
+<td align="left">50-55%</td>
+<td align="left">4-5</td>
+<td align="left"><strong>Conditioning Focus:</strong> Pull-Ups, Hand Release Push-Ups, Jumping Squats. Perform 3 Pull-Ups or 6 Inverted Rows, 5 Hand Release Push-Ups, 10 Jumping Squats.</td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left">Heavy</td>
+<td align="left">Cheat Barbell Rows</td>
+<td align="left">60-65%</td>
+<td align="left">3-4</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left">Light</td>
+<td align="left">Pause Bench Press</td>
+<td align="left">40-45%</td>
+<td align="left">5-6</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left">Heavy</td>
+<td align="left">Block Pulls or Rack Deadlifts</td>
+<td align="left">60-65%</td>
+<td align="left">3-4</td>
+<td align="left"><strong>Assistance Focus:</strong> Dumbbell Russian Twists &amp; Rows. Odd Minutes: 50ft Single Arm DB/KB Waiter&#39;s Walk (Each Side) or :20s hold. Even Minutes: 30 Seconds Inverted Rows.</td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left">Light</td>
+<td align="left">Weighted Chin-Ups</td>
+<td align="left">40-45%</td>
+<td align="left">5-6</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left">Medium</td>
+<td align="left">Pin Press (Pins just above Eye)</td>
+<td align="left">50-55%</td>
+<td align="left">4-5</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">4</td>
+<td align="left">Light</td>
+<td align="left">Pause Squats</td>
+<td align="left">40-45%</td>
+<td align="left">5-6</td>
+<td align="left"><strong>Mindset Focus:</strong> Dumbbell Strict Presses &amp; Shrugs. For 5 minutes WITHOUT rest: 5-8 Strict DB Presses, 10 Long Pause DB Shrugs. <em>Dumbbells remain in hands for the entire 5 minutes.</em></td>
+</tr>
+<tr>
+<td align="left">4</td>
+<td align="left">Medium</td>
+<td align="left">Sandbag/Keg/Stone Load to Shoulder</td>
+<td align="left">50-55%</td>
+<td align="left">4-5</td>
+<td align="left"><em>Replace with Squat or Row variation if not possible.</em></td>
+</tr>
+<tr>
+<td align="left">4</td>
+<td align="left">Heavy</td>
+<td align="left">Close Grip Bench Press</td>
+<td align="left">60-65%</td>
+<td align="left">3-4</td>
+<td align="left"></td>
+</tr>
+</tbody></table>
+<h3 id="week-3">Week 3</h3>
+<table>
+<thead>
+<tr>
+<th align="left">Day</th>
+<th align="left">HLM</th>
+<th align="left">Exercise</th>
+<th align="left">Pct</th>
+<th align="left">Reps</th>
+<th align="left">Core/Conditioning Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">1</td>
+<td align="left">Medium</td>
+<td align="left">Deficit Deadlifts</td>
+<td align="left">50-55%</td>
+<td align="left">4-5</td>
+<td align="left"><strong>Core/Oblique Focus:</strong> Planks. :40 Second Plank (or :30s if too hard). Use remainder of minute to rest. <em>Option to do 10-Minute Plank Challenge (hold position for full 10 minutes).</em></td>
+</tr>
+<tr>
+<td align="left">1</td>
+<td align="left">Heavy</td>
+<td align="left">Farmer&#39;s Walk</td>
+<td align="left">60-65%</td>
+<td align="left">50 ft</td>
+<td align="left"><em>Add a 10-20 Second Hold at finish line if desired.</em></td>
+</tr>
+<tr>
+<td align="left">1</td>
+<td align="left">Light</td>
+<td align="left">&quot;Z&quot; Pin Press</td>
+<td align="left">40-45%</td>
+<td align="left">5-6</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left">Heavy</td>
+<td align="left">Box Squats</td>
+<td align="left">60-65%</td>
+<td align="left">3-4</td>
+<td align="left"><strong>Conditioning Focus:</strong> Burpees, Squats, Push-Ups, Mountain Climbers, Jumping Jacks. Perform 3 Burpees, 5 Squats, 5 Push-Ups, 12 Mountain Climbers, 12 Jumping Jacks.</td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left">Light</td>
+<td align="left">Dumbbell Rows (Single Arm)</td>
+<td align="left">40-45%</td>
+<td align="left">:20s/side</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left">Medium</td>
+<td align="left">Pin Bench Press (Sticking Point)</td>
+<td align="left">50-55%</td>
+<td align="left">4-5</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left">Light</td>
+<td align="left">Snatch Grip Deadlifts</td>
+<td align="left">40-45%</td>
+<td align="left">5-6</td>
+<td align="left"><strong>Core/Oblique Focus:</strong> Tabatas (Plate Halos &amp; Plate Russian Twists). :20s work/:10s rest for 8 rounds (4 mins), then 1 min rest, repeat for 8 rounds.</td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left">Medium</td>
+<td align="left">Weighted Pull-Ups</td>
+<td align="left">50-55%</td>
+<td align="left">4-5</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left">Heavy</td>
+<td align="left">Push Jerk or Split Jerk</td>
+<td align="left">60-65%</td>
+<td align="left">3-4</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">4</td>
+<td align="left">Medium</td>
+<td align="left">Bulgarian Split Squats</td>
+<td align="left">50-55%</td>
+<td align="left">3-4/side</td>
+<td align="left"><strong>Conditioning Focus:</strong> Legs. Perform 6 Lunges (Total), 6 Jumping Lunges (Total), 7 Squats, 7 Jumping Squats.</td>
+</tr>
+<tr>
+<td align="left">4</td>
+<td align="left">Heavy</td>
+<td align="left">Sandbag/Keg/Stone Load</td>
+<td align="left">60-65%</td>
+<td align="left">3-4</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">4</td>
+<td align="left">Light</td>
+<td align="left">JM Press or Larson Press</td>
+<td align="left">40-45%</td>
+<td align="left">5-6</td>
+<td align="left"></td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="wave-2-weeks-4-6">Wave 2 (Weeks 4-6)</h2>
+<p><strong>Percentages and Reps:</strong> Everything kicks up by 5% from Wave 1, while reps stay the same.</p>
+<ul>
+<li><strong>Light:</strong> 45% for 5-6 reps.</li>
+<li><strong>Medium:</strong> 55% for 4-5 reps.</li>
+<li><strong>Heavy:</strong> 65% for 3-4 reps.</li>
+</ul>
+<h3 id="week-4">Week 4</h3>
+<table>
+<thead>
+<tr>
+<th align="left">Day</th>
+<th align="left">HLM</th>
+<th align="left">Exercise</th>
+<th align="left">Pct</th>
+<th align="left">Reps</th>
+<th align="left">Core/Conditioning Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">1</td>
+<td align="left">Heavy</td>
+<td align="left">Conventional Deadlifts</td>
+<td align="left">65-70%</td>
+<td align="left">3-4</td>
+<td align="left"><strong>Assistance Finisher:</strong> Lats Barbell Rows. Barbell Rows &amp; Burpee Lateral Jumps. Minute 1: 8 reps, Minute 2: 7 reps, down to Minute 6: 3 reps. Barbell should be close to bodyweight.</td>
+</tr>
+<tr>
+<td align="left">1</td>
+<td align="left">Light</td>
+<td align="left">Farmer’s Walk</td>
+<td align="left">45-50%</td>
+<td align="left">150 ft</td>
+<td align="left"><em>Replace with Deadlift or Row variation if not possible, using same reps &amp; intensity.</em></td>
+</tr>
+<tr>
+<td align="left">1</td>
+<td align="left">Medium</td>
+<td align="left">Strict Press</td>
+<td align="left">55-60%</td>
+<td align="left">4-5</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left">Light</td>
+<td align="left">Squats (High Bar/Low Bar)</td>
+<td align="left">45-50%</td>
+<td align="left">5-6</td>
+<td align="left"><strong>Conditioning Focus:</strong> Max Reps for 60 seconds each, with 60 seconds rest between. Push-Ups, Sit-Ups (Feet Anchored), Squats (DEEP), Hollow Rocks, Burpees.</td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left">Medium</td>
+<td align="left">Pendlay Rows</td>
+<td align="left">55-60%</td>
+<td align="left">4-5</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left">Heavy</td>
+<td align="left">Bench Press</td>
+<td align="left">65-70%</td>
+<td align="left">3-4</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left">Medium</td>
+<td align="left">Stiff Leg or Romanian DLs</td>
+<td align="left">55-60%</td>
+<td align="left">4-5</td>
+<td align="left"><strong>Assistance Focus:</strong> Pull-Ups/Inverted Rows &amp; Sumo Deadlifts/Goblet Squats. Odd Minutes: 3-5 Pull-Ups or 10-15 Inverted Rows. Even Minutes: 5-8 Sumo Deadlifts or 8-12 Goblet Squats.</td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left">Heavy</td>
+<td align="left">Weighted Pull-Ups</td>
+<td align="left">65-70%</td>
+<td align="left">3-4</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left">Light</td>
+<td align="left">&quot;Z&quot; Press</td>
+<td align="left">45-50%</td>
+<td align="left">5-6</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">4</td>
+<td align="left">Heavy</td>
+<td align="left">Front Squats or Zercher</td>
+<td align="left">65-70%</td>
+<td align="left">3-4</td>
+<td align="left"><strong>Conditioning Focus:</strong> 8 Rounds of :30s Max Reps Dumbbell/Kettlebell Goblet Squats (DEEP), :30s Max Reps Burpees, :30s Rest.</td>
+</tr>
+<tr>
+<td align="left">4</td>
+<td align="left">Light</td>
+<td align="left">Sandbag/Keg/Stone Load</td>
+<td align="left">45-50%</td>
+<td align="left">5-6</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">4</td>
+<td align="left">Medium</td>
+<td align="left">Floor Press</td>
+<td align="left">55-60%</td>
+<td align="left">4-5</td>
+<td align="left"></td>
+</tr>
+</tbody></table>
+<h3 id="week-5">Week 5</h3>
+<table>
+<thead>
+<tr>
+<th align="left">Day</th>
+<th align="left">HLM</th>
+<th align="left">Exercise</th>
+<th align="left">Pct</th>
+<th align="left">Reps</th>
+<th align="left">Core/Conditioning Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">1</td>
+<td align="left">Light</td>
+<td align="left">Pause Deadlifts (2&quot; Off Ground)</td>
+<td align="left">45-50%</td>
+<td align="left">5-6</td>
+<td align="left"><strong>Assistance Focus:</strong> As Many Rounds As Possible in 10 Minutes. 10 DB Incline Squeeze Presses, 10 Pull-Ups or 30 Inverted Rows, 10 Dips or 30 Push-Ups, 20 Band or Cable Tricep Extensions.</td>
+</tr>
+<tr>
+<td align="left">1</td>
+<td align="left">Medium</td>
+<td align="left">Front Carry (Sandbag/Keg/Stone)</td>
+<td align="left">55-60%</td>
+<td align="left">100 ft</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">1</td>
+<td align="left">Heavy</td>
+<td align="left">Push Press</td>
+<td align="left">65-70%</td>
+<td align="left">3-4</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left">Medium</td>
+<td align="left">Pin Squat (Pin at bottom)</td>
+<td align="left">55-60%</td>
+<td align="left">4-5</td>
+<td align="left"><strong>Conditioning Focus:</strong> Push-Up Challenge. Begin standing. Drop &amp; perform 1 push-up, stand. Drop &amp; perform 2 push-ups, stand. Continue up, then work back down to 1 rep. No rest between sets.</td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left">Heavy</td>
+<td align="left">Cheat Barbell Rows</td>
+<td align="left">65-70%</td>
+<td align="left">3-4</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left">Light</td>
+<td align="left">Pause Bench Press</td>
+<td align="left">45-50%</td>
+<td align="left">5-6</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left">Heavy</td>
+<td align="left">Block Pulls or Rack Deadlifts</td>
+<td align="left">65-70%</td>
+<td align="left">3-4</td>
+<td align="left"><strong>Assistance Focus:</strong> Dumbbell/Kettlebell &quot;Z&quot; Presses &amp; Hollow Rocks. 10 &quot;Z&quot; Presses (Moderate Weight), 25 Hollow Rocks.</td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left">Light</td>
+<td align="left">Weighted Chin-Ups</td>
+<td align="left">45-50%</td>
+<td align="left">5-6</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left">Medium</td>
+<td align="left">Pin Press (Pins just above Eye)</td>
+<td align="left">55-60%</td>
+<td align="left">4-5</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">4</td>
+<td align="left">Light</td>
+<td align="left">Pause Squats</td>
+<td align="left">45-50%</td>
+<td align="left">5-6</td>
+<td align="left"><strong>Mindset Focus:</strong> &quot;Bring Sally Up&quot; (Moby - Flower). Choose bodyweight exercise (Squats, Push-Ups, Dips). Drop to bottom position on &quot;Bring Sally Down&quot;, return to start on &quot;Bring Sally Up&quot;. <em>Add weight if too easy.</em></td>
+</tr>
+<tr>
+<td align="left">4</td>
+<td align="left">Medium</td>
+<td align="left">Sandbag/Keg/Stone Load to Shoulder</td>
+<td align="left">55-60%</td>
+<td align="left">4-5</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">4</td>
+<td align="left">Heavy</td>
+<td align="left">Close Grip Bench Press</td>
+<td align="left">65-70%</td>
+<td align="left">3-4</td>
+<td align="left"></td>
+</tr>
+</tbody></table>
+<h3 id="week-6">Week 6</h3>
+<table>
+<thead>
+<tr>
+<th align="left">Day</th>
+<th align="left">HLM</th>
+<th align="left">Exercise</th>
+<th align="left">Pct</th>
+<th align="left">Reps</th>
+<th align="left">Core/Conditioning Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">1</td>
+<td align="left">Medium</td>
+<td align="left">Deficit Deadlifts</td>
+<td align="left">60-65%</td>
+<td align="left">4-5</td>
+<td align="left"><strong>Core/Oblique Focus:</strong> Cable Wood Chops/Barbell Full Contact Twists &amp; Barbell Overhead Side Bands. Odd Minutes: 8 Cable Wood Chops or Barbell Full Contact Twists (Each Side). Even Minutes: 4 Barbell Overhead Side Bands.</td>
+</tr>
+<tr>
+<td align="left">1</td>
+<td align="left">Heavy</td>
+<td align="left">Farmer&#39;s Walk</td>
+<td align="left">70-75%</td>
+<td align="left">50 ft</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">1</td>
+<td align="left">Light</td>
+<td align="left">&quot;Z&quot; Pin Press</td>
+<td align="left">50-55%</td>
+<td align="left">5-6</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left">Heavy</td>
+<td align="left">Box Squats</td>
+<td align="left">65-70%</td>
+<td align="left">3-4</td>
+<td align="left"><strong>Conditioning Focus:</strong> Burpee Ladder. Minute 1: 2 Burpees, Minute 2: 4 Burpees, Minute 3: 6 Burpees, Minute 4: 8 Burpees, Minute 5: 10 Burpees, then back down: Minute 6: 8 Burpees, etc..</td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left">Light</td>
+<td align="left">Dumbbell Rows (Single Arm)</td>
+<td align="left">45-50%</td>
+<td align="left">:20s/side</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left">Medium</td>
+<td align="left">Pin Bench Press (Sticking Point)</td>
+<td align="left">55-60%</td>
+<td align="left">4-5</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left">Light</td>
+<td align="left">Snatch Grip Deadlifts</td>
+<td align="left">45-50%</td>
+<td align="left">5-6</td>
+<td align="left"><strong>Core/Oblique Focus:</strong> Tabatas (&quot;V&quot; Sit-Ups/Flutter Kicks &amp; Dead Bugs/Hollow Rocks). :20s work/:10s rest for 8 rounds (4 mins), then 1 min rest, repeat for 8 rounds.</td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left">Medium</td>
+<td align="left">Weighted Pull-Ups</td>
+<td align="left">55-60%</td>
+<td align="left">4-5</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left">Heavy</td>
+<td align="left">Push Jerk or Split Jerk</td>
+<td align="left">65-70%</td>
+<td align="left">3-4</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">4</td>
+<td align="left">Medium</td>
+<td align="left">Bulgarian Split Squats</td>
+<td align="left">55-60%</td>
+<td align="left">3-4/side</td>
+<td align="left"><strong>Conditioning Focus:</strong> 5 Rounds for Legs. :30s Jumping Squats (High As Possible), :30s Prisoner Squats (Deep), :30s Wall Sit (Hands not touching Body), :30s Rest.</td>
+</tr>
+<tr>
+<td align="left">4</td>
+<td align="left">Heavy</td>
+<td align="left">Sandbag/Keg/Stone Load</td>
+<td align="left">65-70%</td>
+<td align="left">3-4</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">4</td>
+<td align="left">Light</td>
+<td align="left">JM Press or Larson Press</td>
+<td align="left">45-50%</td>
+<td align="left">5-6</td>
+<td align="left"></td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="wave-3-weeks-7-9">Wave 3 (Weeks 7-9)</h2>
+<p><strong>Percentages and Reps:</strong></p>
+<ul>
+<li><strong>Light:</strong> <strong>50% for 4-5 reps</strong> (Corrected from 55% for 5-6 reps in your custom program).</li>
+<li><strong>Medium:</strong> <strong>60% for 3-4 reps</strong> (Corrected from 65% for 3-4 reps in your custom program).</li>
+<li><strong>Heavy:</strong> 70% for 2-3 reps (This was correct in your custom program).</li>
+</ul>
+<h3 id="week-7">Week 7</h3>
+<table>
+<thead>
+<tr>
+<th align="left">Day</th>
+<th align="left">HLM</th>
+<th align="left">Exercise</th>
+<th align="left">Pct</th>
+<th align="left">Reps</th>
+<th align="left">Core/Conditioning Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">1</td>
+<td align="left">Heavy</td>
+<td align="left">Conventional Deadlifts</td>
+<td align="left">70-75%</td>
+<td align="left">3-4</td>
+<td align="left"><strong>Assistance Focus:</strong> Hanging Leg Raises or Knee Raises. Odd Minutes: 3-5 Chest to Bar Chin-Ups or 10-15 Inverted Rows. Even Minutes: 5 Hanging Leg Raises or Knee Raises.</td>
+</tr>
+<tr>
+<td align="left">1</td>
+<td align="left">Light</td>
+<td align="left">Farmer’s Walk</td>
+<td align="left">50-55%</td>
+<td align="left">150 ft</td>
+<td align="left"><em>Replace with Deadlift or Row variation if not possible, using same reps &amp; intensity.</em></td>
+</tr>
+<tr>
+<td align="left">1</td>
+<td align="left">Medium</td>
+<td align="left">Strict Press</td>
+<td align="left">60-65%</td>
+<td align="left">4-5</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left">Light</td>
+<td align="left">Squats (High Bar/Low Bar)</td>
+<td align="left"><strong>50-55%</strong></td>
+<td align="left"><strong>4-5</strong></td>
+<td align="left"><strong>Conditioning Focus:</strong> Burpees &amp; Squats. Perform 3-5 Burpees and 10 Prisoner Squats.</td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left">Medium</td>
+<td align="left">Pendlay Rows</td>
+<td align="left"><strong>60-65%</strong></td>
+<td align="left"><strong>3-4</strong></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left">Heavy</td>
+<td align="left">Bench Press</td>
+<td align="left">70-75%</td>
+<td align="left">3-4</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left">Medium</td>
+<td align="left">Stiff Leg or Romanian DLs</td>
+<td align="left"><strong>60-65%</strong></td>
+<td align="left"><strong>3-4</strong></td>
+<td align="left"><strong>Assistance Focus:</strong> Dumbbell Russian Twists &amp; Rows. Odd Minutes: 7 Weighted Russian Twists (Each Side). Even Minutes: 8 Single Arm Dumbbell Rows (Each Side).</td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left">Heavy</td>
+<td align="left">Weighted Pull-Ups</td>
+<td align="left">70-75%</td>
+<td align="left">3-4</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left">Light</td>
+<td align="left">&quot;Z&quot; Press</td>
+<td align="left"><strong>50-55%</strong></td>
+<td align="left"><strong>4-5</strong></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">4</td>
+<td align="left">Heavy</td>
+<td align="left">Front Squats or Zercher</td>
+<td align="left">70-75%</td>
+<td align="left">3-4</td>
+<td align="left"><strong>Conditioning Focus:</strong> Dumbbell ManMakers. Perform 3 Dumbbell ManMakers.</td>
+</tr>
+<tr>
+<td align="left">4</td>
+<td align="left">Light</td>
+<td align="left">Sandbag/Keg/Stone Load</td>
+<td align="left"><strong>50-55%</strong></td>
+<td align="left"><strong>4-5</strong></td>
+<td align="left"><em>Replace with Row variation if not possible.</em></td>
+</tr>
+<tr>
+<td align="left">4</td>
+<td align="left">Medium</td>
+<td align="left">Floor Press</td>
+<td align="left"><strong>60-65%</strong></td>
+<td align="left"><strong>3-4</strong></td>
+<td align="left"></td>
+</tr>
+</tbody></table>
+<h3 id="week-8">Week 8</h3>
+<table>
+<thead>
+<tr>
+<th align="left">Day</th>
+<th align="left">HLM</th>
+<th align="left">Exercise</th>
+<th align="left">Pct</th>
+<th align="left">Reps</th>
+<th align="left">Core/Conditioning Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">1</td>
+<td align="left">Light</td>
+<td align="left">Pause Deadlifts (2&quot; Off Ground)</td>
+<td align="left"><strong>50-55%</strong></td>
+<td align="left"><strong>4-5</strong></td>
+<td align="left"><strong>Assistance Focus:</strong> Hollow Rocks &amp; Dips/Push-Ups. :20 Seconds Hollow Rocks, :20 Seconds Dips or Deficit Push-Ups, :20 Seconds Rest.</td>
+</tr>
+<tr>
+<td align="left">1</td>
+<td align="left">Medium</td>
+<td align="left">Front Carry (Sandbag/Keg/Stone)</td>
+<td align="left"><strong>60-65%</strong></td>
+<td align="left"><strong>3-4</strong></td>
+<td align="left"><em>Replace with marching in place or Deadlift/Row variation if not possible.</em></td>
+</tr>
+<tr>
+<td align="left">1</td>
+<td align="left">Heavy</td>
+<td align="left">Push Press</td>
+<td align="left">70-75%</td>
+<td align="left">3-4</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left">Medium</td>
+<td align="left">Pin Squat (Pin at bottom)</td>
+<td align="left"><strong>60-65%</strong></td>
+<td align="left"><strong>3-4</strong></td>
+<td align="left"><strong>Conditioning Focus:</strong> Pull-Ups, Hand Release Push-Ups, Jumping Squats. Perform 3 Pull-Ups or 6 Inverted Rows, 5 Hand Release Push-Ups, 10 Jumping Squats.</td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left">Heavy</td>
+<td align="left">Cheat Barbell Rows</td>
+<td align="left">70-75%</td>
+<td align="left">3-4</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left">Light</td>
+<td align="left">Pause Bench Press</td>
+<td align="left"><strong>50-55%</strong></td>
+<td align="left"><strong>4-5</strong></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left">Heavy</td>
+<td align="left">Block Pulls or Rack Deadlifts</td>
+<td align="left">70-75%</td>
+<td align="left">3-4</td>
+<td align="left"><strong>Assistance Focus:</strong> Dumbbell Russian Twists &amp; Rows. Odd Minutes: 50ft Single Arm DB/KB Waiter&#39;s Walk (Each Side) or :20s hold. Even Minutes: 30 Seconds Inverted Rows.</td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left">Light</td>
+<td align="left">Weighted Chin-Ups</td>
+<td align="left"><strong>50-55%</strong></td>
+<td align="left"><strong>4-5</strong></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left">Medium</td>
+<td align="left">Pin Press (Pins just above Eye)</td>
+<td align="left"><strong>60-65%</strong></td>
+<td align="left"><strong>3-4</strong></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">4</td>
+<td align="left">Light</td>
+<td align="left">Pause Squats</td>
+<td align="left"><strong>50-55%</strong></td>
+<td align="left"><strong>4-5</strong></td>
+<td align="left"><strong>Mindset Focus:</strong> Dumbbell Strict Presses &amp; Shrugs. For 5 minutes WITHOUT rest: 5-8 Strict DB Presses, 10 Long Pause DB Shrugs. <em>Dumbbells remain in hands for the entire 5 minutes.</em></td>
+</tr>
+<tr>
+<td align="left">4</td>
+<td align="left">Medium</td>
+<td align="left">Sandbag/Keg/Stone Load to Shoulder</td>
+<td align="left"><strong>60-65%</strong></td>
+<td align="left"><strong>3-4</strong></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">4</td>
+<td align="left">Heavy</td>
+<td align="left">Close Grip Bench Press</td>
+<td align="left">70-75%</td>
+<td align="left">3-4</td>
+<td align="left"></td>
+</tr>
+</tbody></table>
+<h3 id="week-9">Week 9</h3>
+<table>
+<thead>
+<tr>
+<th align="left">Day</th>
+<th align="left">HLM</th>
+<th align="left">Exercise</th>
+<th align="left">Pct</th>
+<th align="left">Reps</th>
+<th align="left">Core/Conditioning Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">1</td>
+<td align="left">Medium</td>
+<td align="left">Deficit Deadlifts</td>
+<td align="left"><strong>60-65%</strong></td>
+<td align="left"><strong>3-4</strong></td>
+<td align="left"><strong>Core/Oblique Focus:</strong> Planks. :40 Second Plank (or :30s if too hard). Use remainder of minute to rest. <em>Option to do 10-Minute Plank Challenge (hold position for full 10 minutes).</em></td>
+</tr>
+<tr>
+<td align="left">1</td>
+<td align="left">Heavy</td>
+<td align="left">Farmer&#39;s Walk</td>
+<td align="left">70-75%</td>
+<td align="left">50 ft</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">1</td>
+<td align="left">Light</td>
+<td align="left">&quot;Z&quot; Pin Press</td>
+<td align="left"><strong>50-55%</strong></td>
+<td align="left"><strong>4-5</strong></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left">Heavy</td>
+<td align="left">Box Squats</td>
+<td align="left">70-75%</td>
+<td align="left">3-4</td>
+<td align="left"><strong>Conditioning Focus:</strong> Burpees, Squats, Push-Ups, Mountain Climbers, Jumping Jacks. Perform 3 Burpees, 5 Squats, 5 Push-Ups, 12 Mountain Climbers, 12 Jumping Jacks.</td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left">Light</td>
+<td align="left">Dumbbell Rows (Single Arm)</td>
+<td align="left"><strong>50-55%</strong></td>
+<td align="left"><strong>4-5</strong></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left">Medium</td>
+<td align="left">Pin Bench Press (Sticking Point)</td>
+<td align="left"><strong>60-65%</strong></td>
+<td align="left"><strong>3-4</strong></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left">Light</td>
+<td align="left">Snatch Grip Deadlifts</td>
+<td align="left"><strong>50-55%</strong></td>
+<td align="left"><strong>4-5</strong></td>
+<td align="left"><strong>Core/Oblique Focus:</strong> Tabatas (Plate Halos &amp; Plate Russian Twists). :20s work/:10s rest for 8 rounds (4 mins), then 1 min rest, repeat for 8 rounds.</td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left">Medium</td>
+<td align="left">Weighted Pull-Ups</td>
+<td align="left"><strong>60-65%</strong></td>
+<td align="left"><strong>3-4</strong></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left">Heavy</td>
+<td align="left">Push Jerk or Split Jerk</td>
+<td align="left">70-75%</td>
+<td align="left">3-4</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">4</td>
+<td align="left">Medium</td>
+<td align="left">Bulgarian Split Squats</td>
+<td align="left"><strong>60-65%</strong></td>
+<td align="left"><strong>3-4</strong></td>
+<td align="left"><strong>Conditioning Focus:</strong> Legs. Perform 6 Lunges (Total), 6 Jumping Lunges (Total), 7 Squats, 7 Jumping Squats.</td>
+</tr>
+<tr>
+<td align="left">4</td>
+<td align="left">Heavy</td>
+<td align="left">Sandbag/Keg/Stone Load</td>
+<td align="left">70-75%</td>
+<td align="left">3-4</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">4</td>
+<td align="left">Light</td>
+<td align="left">JM Press or Larson Press</td>
+<td align="left"><strong>50-55%</strong></td>
+<td align="left"><strong>4-5</strong></td>
+<td align="left"></td>
+</tr>
+</tbody></table>
+<hr>
+
+    </main>
+</body>
+</html>
