@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krypteia Program: Comprehensive Reference Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        
+        :root {
+            --bg-color: #f9f9f9;
+            --text-color: #333333;
+            --heading-color: #111111;
+            --accent-color: #007bff;
+            --accent-hover-color: #0056b3;
+            --border-color: #dddddd;
+            --header-bg: #ffffff;
+            --blockquote-bg: #f0f0f0;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --heading-color: #ffffff;
+                --accent-color: #4dabf7;
+                --accent-hover-color: #82c9ff;
+                --border-color: #444444;
+                --header-bg: #1e1e1e;
+                --blockquote-bg: #2a2a2a;
+            }
+        }
+
+        /* Add smooth scrolling for anchor links */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Lora', serif;
+            line-height: 1.7;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        main {
+            max-width: 70ch;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Inter', sans-serif;
+            color: var(--heading-color);
+            line-height: 1.3;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            border-bottom: none;
+        }
+
+        h2 {
+            font-size: 2rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        a:hover {
+            color: var(--accent-hover-color);
+            text-decoration: underline;
+        }
+
+        blockquote {
+            border-left: 4px solid var(--accent-color);
+            padding: 1rem 1.5rem;
+            margin: 2rem 0;
+            font-style: italic;
+            color: var(--text-color);
+            background-color: var(--blockquote-bg);
+            border-radius: 4px;
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background: var(--border-color);
+            margin: 3rem 0;
+        }
+
+        ul, ol {
+            padding-left: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        code {
+            background-color: var(--blockquote-bg);
+            padding: 0.2em 0.4em;
+            margin: 0;
+            font-size: 85%;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+
+        pre {
+            background-color: var(--blockquote-bg);
+            padding: 1rem;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 2rem auto;
+            display: block;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+        }
+
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 0.75rem;
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--blockquote-bg);
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Table of Contents Styling */
+        #table-of-contents {
+            background-color: var(--header-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem 2rem;
+            margin: 2rem auto;
+            max-width: 70ch;
+        }
+
+        #table-of-contents h2 {
+            margin-top: 0;
+            border-bottom: none;
+            font-size: 1.5rem;
+            text-align: left; /* Override any global centered h2 styles */
+        }
+
+        #table-of-contents ol {
+            padding-left: 20px;
+            margin: 0;
+            list-style-type: decimal;
+        }
+
+        #table-of-contents li {
+            font-family: 'Inter', sans-serif;
+            padding: 0.5rem 0;
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.2rem; }
+            h2 { font-size: 1.8rem; }
+            main, #table-of-contents { padding: 0 1rem; margin: 1rem auto; }
+        }
+                
+    </style>
+</head>
+<body>
+    
+    <main>
+        <h1 id="krypteia-program-comprehensive-reference-document">Krypteia Program: Comprehensive Reference Document</h1>
+<p>This document outlines the principles, structure, and execution of the Krypteia training program within the broader context of Jim Wendler&#39;s 5/3/1 training philosophy.</p>
+<h2 id="1-jim-wendlers-general-training-philosophy">1. Jim Wendler&#39;s General Training Philosophy</h2>
+<p>Jim Wendler&#39;s training approach, particularly the 5/3/1 system, is built on several core principles designed for <strong>long-term, sustainable progress</strong>, emphasizing <strong>quality over quantity</strong> and the <strong>importance of consistency and discipline</strong>.</p>
+<ul>
+<li><p><strong>Core Principles of 5/3/1</strong>:</p>
+<ul>
+<li><strong>Start Too Light</strong>: This applies to the training max (TM) and building a strong base before attempting heavier weights. It allows the body and mind to adapt and build a &quot;training callous,&quot; like a flying 40-yard dash for momentum.</li>
+<li><strong>Progress Slow</strong>: Training maxes are increased gradually, typically by 5 pounds for bench/press and 10 pounds for squat/deadlift after each 3-week cycle. This slow progression ensures continued success without injury or stagnation.</li>
+<li><strong>Use Multi-Joint Movements</strong>: Focus on foundational compound exercises like squat, bench press, deadlift, and overhead press.</li>
+<li><strong>Set PRs (Personal Records)</strong>: The program encourages setting rep PRs on the final set of main lifts (e.g., 5+, 3+, or 1+ reps) rather than focusing on 1-rep maxes in training. This drives progress without excessive risk.</li>
+<li><strong>Balance</strong>: Training should be balanced across different aspects (lifting, jumping, throwing, conditioning, recovery) to ensure holistic development and prevent overtraining.</li>
+</ul>
+</li>
+<li><p><strong>Key Concepts and Mindset</strong>:</p>
+<ul>
+<li><strong>Quality over Quantity</strong>: It&#39;s better to do five things correctly than fifteen things incorrectly. Training sessions should be efficient and purposeful, not just long.</li>
+<li><strong>Efficiency</strong>: Training should be time-efficient, aiming to get work done without unnecessary time in the gym.</li>
+<li><strong>Know Your Program&#39;s &quot;Trapdoors&quot;</strong>: A coach or individual must understand their program deeply to know when and how to make adjustments based on an athlete&#39;s readiness or unforeseen issues (e.g., fatigue, injury).</li>
+<li><strong>Individual Sovereignty</strong>: Athletes are responsible for pushing themselves on assistance work.</li>
+<li><strong>No Record Boards in Training</strong>: The focus is on incremental progress and personal development, not chasing numbers for ego.</li>
+<li><strong>Training Max (TM)</strong>: This is a percentage (typically 80-90%, often 85%) of a lifter&#39;s actual or estimated 1-rep max, used to calculate all working weights for the program. Starting with a lighter TM (e.g., 85%) is frequently recommended for better bar speed and long-term progress.</li>
+<li><strong>Leader and Anchor Templates</strong>: Wendler&#39;s programming often uses cycles of &quot;Leader&quot; templates (higher volume, builds work capacity) followed by &quot;Anchor&quot; templates (more intense, less barbell volume, for hitting PRs or consolidating gains).</li>
+<li><strong>7th Week Protocol</strong>: This is a planned break week that can serve three functions: a <strong>deload</strong> (reduction in volume to aid recovery), a <strong>training max test</strong> (to check if the TM is set correctly), or a <strong>PR test</strong> (to push for a new rep record). It involves reduced volume and limited assistance work.</li>
+<li><strong>Recovery</strong>: Consists of four major components: <strong>diet, sleep, movement (mobility/active recovery), and training (not training like an &quot;asshole&quot;)</strong>. Consistency in these areas is crucial for progress.</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-introduction-to-krypteia">2. Introduction to Krypteia</h2>
+<p>Krypteia is a specific 5/3/1 program detailed in &quot;5/3/1 Forever&quot;. It is particularly noted for its <strong>intensity, efficiency, and effectiveness in improving conditioning, size, and general strength</strong>.</p>
+<ul>
+<li><p><strong>Purpose</strong>:</p>
+<ul>
+<li>Designed as a preparatory phase (&quot;prep cycle&quot;) to get trainees back into shape, specifically to &quot;whip back into shape&quot; or &quot;undo the damage&quot; of high-volume, single-set programs like Super Squats.</li>
+<li>Aims to improve conditioning and size while still allowing for strength gains.</li>
+<li>Suitable for individuals needing a &quot;reality check&quot; on their conditioning or those with limited gym time (e.g., under 60 minutes total).</li>
+</ul>
+</li>
+<li><p><strong>Key Characteristics</strong>:</p>
+<ul>
+<li>Emphasizes <strong>many sets of few reps</strong> (duality to Super Squats&#39; one set of many reps).</li>
+<li>Features <strong>intense, compressed volume</strong> within shorter training times.</li>
+<li>Heavy emphasis on <strong>conditioning</strong>.</li>
+<li>Includes specific assistance work (dips, chins, DB SLDLs, DB squats).</li>
+<li>Known for being <strong>dense</strong> and making old PRs feel easier.</li>
+<li>Leads to significant improvements in conditioning, size (lats, upper pecs), and strength.</li>
+</ul>
+</li>
+<li><p><strong>Suitability (Who it&#39;s for/not for)</strong>:</p>
+<ul>
+<li><strong>Recommended for</strong>: Experienced lifters with a basic training base and reasonable shape. Those who can maintain perfect form under fatigue. Individuals needing a boost in strength, conditioning, and work capacity.</li>
+<li><strong>Not for</strong>: Absolute beginners, individuals with poor form, those who wheeze easily, or lifters whose main focus is competitive powerlifting (though strength gains still occur). Not ideal for those with &quot;training A.D.D.&quot; as it lacks variety.</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-krypteia-program-structure-detailed-breakdown">3. Krypteia Program Structure (Detailed Breakdown)</h2>
+<p>Krypteia is typically run as a <strong>5-cycle program lasting approximately 17 weeks</strong>, including deloads. It consists of three distinct parts: Part 1 (Preparatory), Part 2 (Boring But Big style), and Part 3 (5/3/1 AMRAP style).</p>
+<ul>
+<li><p><strong>General Daily Workout Flow</strong>:</p>
+<ol>
+<li><strong>Warm-up/Mobility</strong>: Essential daily component (e.g., Agile 8). Takes about 10 minutes.</li>
+<li><strong>Jumps/Throws</strong>: Approx. 10-20 total reps per workout, after the warm-up.</li>
+<li><strong>Main Lift</strong>: Squat, Bench Press, Deadlift, or Press.</li>
+<li><strong>Paired/Supersetted Assistance Work</strong>: A defining feature of Krypteia.</li>
+<li><strong>Additional Assistance</strong>: Face Pulls or Band Pull-aparts.</li>
+<li><strong>Conditioning</strong>: Easy conditioning is recommended on training days, and harder conditioning on off-days or combined with lifts (with caution).</li>
+</ol>
+</li>
+<li><p><strong>Workout Time Limit</strong>: All main and supplemental work should be completed within <strong>45 minutes</strong>. This excludes warm-up and jumps/throws. This strict time limit forces intensity and efficiency.</p>
+</li>
+<li><p><strong>Training Max (TM) for Krypteia</strong>: No higher than <strong>85%</strong> of your estimated 1RM is recommended for initial TM setting, as this program involves a lot of work. Some individuals have found success starting even lower to build up.</p>
+</li>
+</ul>
+<h3 id="part-1-preparatory-phase-2-cycles">Part 1: Preparatory Phase (2 Cycles)</h3>
+<ul>
+<li><strong>Purpose</strong>: This initial phase is crucial for adapting the body to the program&#39;s structure and building work capacity. If the 45-minute time limit cannot be met, this part should be repeated.</li>
+<li><strong>Frequency</strong>: 4 days/week (e.g., Monday, Tuesday, Thursday, Friday).</li>
+<li><strong>Main Lift Protocol</strong>: <strong>5&#39;s Progression (5&#39;s PRO)</strong> and <strong>5x5 First Set Last (FSL)</strong>.<ul>
+<li><strong>5&#39;s PRO</strong>: All work sets are performed for 5 reps, without pushing for a PR on the final set. This maintains submaximal loads and focuses on consistent bar speed.</li>
+<li><strong>5x5 FSL</strong>: After the main work sets, perform 5 sets of 5 reps using the weight from your first work set (e.g., 65% of TM).</li>
+</ul>
+</li>
+<li><strong>Assistance Work (Paired/Supersetted)</strong>: This is a core element, performed <em>between every set</em> of the main lift, including warm-up sets.<ul>
+<li><strong>For Bench Press / Press days</strong>: Supersetted with <strong>Dumbbell (DB) Squats</strong> and <strong>DB Stiff-Leg Deadlifts (SLDL) with a shrug</strong>.</li>
+<li><strong>For Squat / Deadlift days</strong>: Supersetted with <strong>Weighted Dips</strong> and <strong>Weighted Chin-ups/Pull-ups</strong>.</li>
+<li><strong>Rep Range for Paired Assistance</strong>: No less than <strong>10 repetitions</strong> per set. Can be pushed for more reps in later cycles.</li>
+<li><strong>Substitutions</strong>: For those unable to perform weighted dips/chins, alternatives include DB incline press/row or close-grip push-ups for dips.</li>
+<li><strong>Additional Assistance</strong>: 100-200 reps of <strong>Face Pulls or Band Pull-aparts</strong> on every training day.</li>
+<li><strong>No other assistance work is prescribed</strong>; do not add extra movements.</li>
+</ul>
+</li>
+<li><strong>TM Progression</strong>: The training max typically <strong>remains the same</strong> throughout Part 1. The focus is on adapting to the volume and speed, not increasing load.</li>
+<li><strong>Assistance Intensity</strong>: In the first cycle of Part 1, keep assistance weights moderate to allow the body to adapt. In the second cycle, push assistance work by increasing weight or reps.</li>
+</ul>
+<h3 id="part-2-boring-but-big-bbb-style-2-cycles">Part 2: Boring But Big (BBB) Style (2 Cycles)</h3>
+<ul>
+<li><strong>Frequency</strong>: 3 days/week (e.g., Monday, Wednesday, Friday).</li>
+<li><strong>Main Lifts</strong>: Squat, Bench Press, Deadlift. (The Press/OHP day is typically <strong>cut out</strong> in this phase to manage volume, though some lifters choose to add it back at lower intensity).</li>
+<li><strong>Main Lift Protocol</strong>: Continues to use <strong>5&#39;s Progression (5&#39;s PRO)</strong>.</li>
+<li><strong>Supplemental Work</strong>: <strong>5 sets of 10 repetitions (5x10) of the main lift</strong>, using a challenging but submaximal weight (e.g., First Set Last weight or a fixed percentage, often lower than FSL for beginners). This is the &quot;Boring But Big&quot; component.</li>
+<li><strong>Assistance Work (Paired/Supersetted)</strong>: Remains the same as Part 1 (DB Squats/SLDL with Bench/Press, Weighted Dips/Chins with Squat/Deadlift).<ul>
+<li><strong>Push Assistance</strong>: Dips, Push-ups.</li>
+<li><strong>Pull Assistance</strong>: Chin-ups, Pull-ups, Inverted Rows.</li>
+<li><strong>Single Leg/Core</strong>: Back Raises, Hanging Leg Raises, Ab Wheel, KB Swings, KB Snatches, single leg work (e.g., Bulgarian squats).</li>
+<li><strong>Rep Range</strong>: 10 repetitions per set for paired assistance.</li>
+<li><strong>Additional Assistance</strong>: 100-200 reps of Face Pulls or Band Pull-aparts daily or every training day.</li>
+</ul>
+</li>
+<li><strong>TM Progression</strong>: The training max is increased after each cycle in Part 2.</li>
+<li><strong>Assistance Intensity</strong>: During this phase, assistance work <strong>must be pushed</strong>.</li>
+</ul>
+<h3 id="part-3-531-pr-set-style-1-cycle">Part 3: 5/3/1 PR Set Style (1 Cycle)</h3>
+<ul>
+<li><strong>Frequency</strong>: 3 days/week (e.g., Monday, Wednesday, Friday).</li>
+<li><strong>Main Lifts</strong>: Squat, Bench Press, Deadlift (Press/OHP remains cut out unless individually modified).</li>
+<li><strong>Main Lift Protocol</strong>: Transitions to the <strong>standard 5/3/1 setup with a PR set</strong> on the final set. This means the last set is taken for as many reps as possible, striving for a personal record.</li>
+<li><strong>Supplemental Work</strong>: <strong>5x5 First Set Last (FSL)</strong>.</li>
+<li><strong>Assistance Work (Paired/Supersetted)</strong>: Remains the same as prior cycles, supersetted with the main lifts.<ul>
+<li><strong>Rep Range</strong>: 10 repetitions per set.</li>
+<li><strong>Additional Assistance</strong>: 100-200 reps of Face Pulls or Band Pull-aparts daily or every training day.</li>
+</ul>
+</li>
+<li><strong>TM Progression</strong>: The training max is increased from Part 2.</li>
+<li><strong>Assistance Intensity</strong>: Continues to be pushed in this phase.</li>
+</ul>
+<h3 id="krypteia-redux-team-training-variation">Krypteia Redux (Team Training Variation)</h3>
+<p>This is a more efficient variation designed for large groups (20-70+ athletes) with 1-2 coaches.</p>
+<ul>
+<li><strong>Key Difference</strong>: <strong>Does NOT superset the main lift with assistance work</strong>.</li>
+<li><strong>Workout Structure</strong>:<ol>
+<li>Warm-up/Jumps (as usual).</li>
+<li><strong>ONE Main Lift per workout</strong> (Squat, Bench Press, Deadlift). This is done with a time limit, focusing on strength work.</li>
+<li><strong>Circuit</strong> of supplemental and assistance work <em>after</em> the main lift.<ul>
+<li><strong>Monday (Squat focus)</strong>: Squat FSL (3-10 reps), Press (10-20 reps), Kirk Rows with Trap Bar (10-20 reps).</li>
+<li><strong>Wednesday (Bench Press focus)</strong>: Bench Press FSL (3-10 reps), DB Squat (10-20 reps), DB Incline Row (10-20 reps).</li>
+<li><strong>Friday (Deadlift focus)</strong>: Deadlift FSL (3-5 reps), DB Incline Press (10-20 reps), Curls (10-20 reps).</li>
+<li>Each circuit is performed <strong>five times</strong>.</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><strong>Efficiency</strong>: Allows for training (including warm-up/jumps/mobility/conditioning) to be completed in approximately <strong>75 minutes</strong>.</li>
+</ul>
+<h2 id="4-conditioning-and-recovery-in-krypteia">4. Conditioning and Recovery in Krypteia</h2>
+<ul>
+<li><p><strong>Conditioning Focus</strong>: Krypteia places a heavy emphasis on conditioning, aiming to significantly improve general fitness levels.</p>
+<ul>
+<li><strong>Easy Conditioning</strong>: Recommended for 2-3 days per week. Can be done on off days or as active recovery. Examples include AirDyne. This is essential for recovery and building an aerobic base.</li>
+<li><strong>Hard Conditioning</strong>: While less emphasized during the lifting sessions themselves, it can be incorporated on off days. If integrating high running volume, it&#39;s advised to reduce the 5x10 work for squat and deadlift in Part 2.</li>
+<li><strong>Wendler&#39;s 50% Rule</strong>: When doing hard conditioning (e.g., Prowler, hills), perform it in a way that you &quot;leave something in the tank.&quot; The goal is training, not testing to exhaustion. Vomiting or gasping for breath indicates doing it wrong.</li>
+</ul>
+</li>
+<li><p><strong>Recovery Components</strong>: Crucial for adapting to Krypteia&#39;s demands.</p>
+<ul>
+<li><strong>Diet</strong>: Emphasize whole foods, sufficient protein (e.g., 1g per lb of bodyweight), and adequate hydration (e.g., 1 gallon of water daily). Diet drives training.</li>
+<li><strong>Sleep</strong>: Hit daily sleep goals (e.g., 8 hours per night).</li>
+<li><strong>Movement</strong>: Daily mobility work (e.g., Agile 8) and active recovery (e.g., walking, foam rolling, stationary bike, specific circuits) are vital to aid recovery and reduce soreness.</li>
+<li><strong>Training (Not like an &quot;Asshole&quot;)</strong>: Train smart and in line with current fitness levels. If consistently tired, sore, or getting weaker, adjust the program rather than pushing through (&quot;More is better&quot; is ignorance; &quot;Better is better&quot; is accurate).</li>
+</ul>
+</li>
+</ul>
+<h2 id="5-summary-of-krypteia-progression">5. Summary of Krypteia Progression</h2>
+<ul>
+<li><strong>Part One</strong>: 4 days/week, 5&#39;s PRO for main lifts, 5x5 FSL for supplemental. Runs for 2 cycles.</li>
+<li><strong>Part Two</strong>: 3 days/week, 5&#39;s PRO for main lifts, 5x10 FSL (or set weight) for supplemental. Runs for 2 cycles.</li>
+<li><strong>Part Three</strong>: 3 days/week, Standard 5/3/1 with PR sets for main lifts, 5x5 FSL for supplemental. Runs for 1 cycle.</li>
+</ul>
+<p>The program typically uses the <strong>3/5/1 week order</strong> (Week 1: 3-rep sets, Week 2: 5-rep sets, Week 3: 1-rep sets with + for PR/AMRAP on final set), which works well for Krypteia. However, the original 5/3/1 (Week 1: 5-rep sets, Week 2: 3-rep sets, Week 3: 1-rep set with +) is also mentioned.</p>
+<p>Upon completion of Krypteia, one can transition to another 5/3/1 program or repeat Krypteia (potentially skipping Part 1 or incorporating minor tweaks for advanced users). The entire program is designed to build a complete training foundation, emphasizing balance, consistent effort, and smart progression.</p>
+<hr>
+<h2 id="sample-full-krypteia-program">Sample Full Krypteia Program</h2>
+<h3 id="phase-1-preparatory-phase-2-cycles">Phase 1: Preparatory Phase (2 Cycles)</h3>
+<p>This initial phase aims to get the body accustomed to the program&#39;s structure and build a strong base. The focus is on perfect form and explosiveness, rather than necessarily pushing for absolute strength.</p>
+<ul>
+<li><strong>Schedule:</strong> 4 days per week (Monday, Tuesday, Thursday, Friday).</li>
+<li><strong>Main Lifts:</strong> Press, Squat, Bench Press, Deadlift.</li>
+<li><strong>Programming:</strong> Main lifts use a specific 5&#39;s Progression (5&#39;s PRO) leading up to 90% of your Training Max (TM), followed by 5 additional sets of 5 reps at 70% of TM (First Set Last - FSL).</li>
+<li><strong>TM:</strong> Use <strong>85%</strong> of your 1RM for all main lifts in this phase.</li>
+<li><strong>Assistance:</strong> Performed for <strong>10 or more reps</strong> and <strong>supersetted with <em>every</em> set of the main lift</strong> (including warm-ups and FSL sets).<ul>
+<li><strong>On Press and Bench Press days:</strong> Alternate between <strong>DB Squat (Goblet Squat)</strong> and <strong>DB SLDL w/shrug</strong>.</li>
+<li><strong>On Squat and Deadlift days:</strong> Alternate between <strong>Weighted Dips</strong> and <strong>Weighted Chins/Pull-ups</strong>.</li>
+<li><em>Alternative Assistance (if weighted bodyweight movements are not possible):</em> Use <strong>DB Incline Press</strong> and <strong>DB Incline Row</strong>.</li>
+</ul>
+</li>
+<li><strong>Additional Assistance:</strong> 100-200 reps of <strong>Face Pulls or Band Pull-aparts</strong> are recommended daily or on training days. No other assistance work should be done.</li>
+</ul>
+<p><strong>Sample Week 1 Workout Structure for Phase 1 (Apply percentages to your 85% TM):</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">Day</th>
+<th align="left">Main Lift</th>
+<th align="left">Main Lift Sets &amp; Reps (% TM)</th>
+<th align="left">Assistance (Superset with each Main Lift set, alternating)</th>
+<th align="left">Notes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>Mon</strong> (Example: Press)</td>
+<td align="left"><strong>Press</strong></td>
+<td align="left"><strong>6 Main Sets (5&#39;s PRO style):</strong> 5 reps @ 40%, 5 reps @ 50%, 5 reps @ 60%, 5 reps @ 70%, 5 reps @ 80%, 5 reps @ 90% <br> <strong>5 Supplemental Sets (5x5 FSL):</strong> 5 sets of 5 reps @ 70%</td>
+<td align="left"><strong>1.</strong> DB Squat (10+ reps) <br> <strong>2.</strong> DB SLDL w/shrug (10+ reps)<br><strong>(Alternate 1 &amp; 2 after each Press set)</strong></td>
+<td align="left">Complete entire lifting session in <strong>45 minutes</strong>. This means keeping rest periods short and moving briskly. Emphasize controlled eccentric and explosive concentric movement for all reps.</td>
+</tr>
+<tr>
+<td align="left"><strong>Tue</strong> (Example: Squat)</td>
+<td align="left"><strong>Squat</strong></td>
+<td align="left"><strong>6 Main Sets (5&#39;s PRO style):</strong> 5 reps @ 40%, 5 reps @ 50%, 5 reps @ 60%, 5 reps @ 70%, 5 reps @ 80%, 5 reps @ 90% <br> <strong>5 Supplemental Sets (5x5 FSL):</strong> 5 sets of 5 reps @ 70%</td>
+<td align="left"><strong>1.</strong> Weighted Dips (10+ reps) <br> <strong>2.</strong> Weighted Chins/Pull-ups (10+ reps)<br><strong>(Alternate 1 &amp; 2 after each Squat set)</strong></td>
+<td align="left">Same as Monday.</td>
+</tr>
+<tr>
+<td align="left"><strong>Thu</strong> (Example: Bench Press)</td>
+<td align="left"><strong>Bench Press</strong></td>
+<td align="left"><strong>6 Main Sets (5&#39;s PRO style):</strong> 5 reps @ 40%, 5 reps @ 50%, 5 reps @ 60%, 5 reps @ 70%, 5 reps @ 80%, 5 reps @ 90% <br> <strong>5 Supplemental Sets (5x5 FSL):</strong> 5 sets of 5 reps @ 70%</td>
+<td align="left"><strong>1.</strong> DB Squat (10+ reps) <br> <strong>2.</strong> DB SLDL w/shrug (10+ reps)<br><strong>(Alternate 1 &amp; 2 after each Bench Press set)</strong></td>
+<td align="left">Same as Monday.</td>
+</tr>
+<tr>
+<td align="left"><strong>Fri</strong> (Example: Deadlift)</td>
+<td align="left"><strong>Deadlift</strong></td>
+<td align="left"><strong>6 Main Sets (5&#39;s PRO style):</strong> 5 reps @ 40%, 5 reps @ 50%, 5 reps @ 60%, 5 reps @ 70%, 5 reps @ 80%, 5 reps @ 90% <br> <strong>5 Supplemental Sets (5x5 FSL):</strong> 5 sets of 5 reps @ 70%</td>
+<td align="left"><strong>1.</strong> Weighted Dips (10+ reps) <br> <strong>2.</strong> Weighted Chins/Pull-ups (10+ reps)<br><strong>(Alternate 1 &amp; 2 after each Deadlift set)</strong></td>
+<td align="left">Same as Monday.</td>
+</tr>
+<tr>
+<td align="left"><strong>Daily</strong></td>
+<td align="left">N/A</td>
+<td align="left">N/A</td>
+<td align="left"><strong>Face Pulls or Band Pull-aparts</strong> (100-200 reps total)</td>
+<td align="left">These should be performed every day or on every training day.</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="phase-2-volume-building-2-cycles">Phase 2: Volume Building (2 Cycles)</h3>
+<p>This phase increases the overall volume, particularly for the main lifts&#39; supplemental work. The focus here is on further building work capacity within the lifting sessions.</p>
+<ul>
+<li><strong>Schedule:</strong> 3 days per week (Monday, Wednesday, Friday).</li>
+<li><strong>Main Lifts:</strong> Squat, Bench Press, Deadlift (<strong>Press is removed</strong> from the main lifts in this phase).</li>
+<li><strong>Programming:</strong> Main lifts continue with 5&#39;s Progression (5&#39;s PRO) for the primary sets. Supplemental work changes to <strong>5 sets of 10 repetitions</strong> (Boring But Big - BBB style) using the First Set Last (FSL) percentage or a set weight.</li>
+<li><strong>TM:</strong> For the first cycle of Phase 2, <strong>start with the same TM as Phase 1</strong>. For the second cycle of Phase 2, increase your TM by 5 lbs (e.g., if Part 1 was 300lbs TM, use 300lbs for the first cycle of Part 2, then 305lbs for the second cycle).</li>
+<li><strong>Assistance:</strong> Remains the same as Phase 1 (supersetting, alternating exercises with 10+ reps), but it is crucial to <strong>push the assistance work harder</strong> in this phase.</li>
+<li><strong>Additional Assistance:</strong> 100-200 reps of <strong>Face Pulls or Band Pull-aparts</strong> are recommended daily or on training days. No other assistance work.</li>
+</ul>
+<p><strong>Sample Week 1 Workout Structure for Phase 2 (Apply percentages to your TM):</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">Day</th>
+<th align="left">Main Lift</th>
+<th align="left">Main Lift Sets &amp; Reps (5&#39;s PRO + 5x10 FSL)</th>
+<th align="left">Assistance (Superset with each Main Lift set, alternating)</th>
+<th align="left">Notes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>Mon</strong> (Example: Squat)</td>
+<td align="left"><strong>Squat</strong></td>
+<td align="left"><strong>6 Main Sets (5&#39;s PRO style):</strong> (e.g., Week 1 percentages from Phase 1) <br> <strong>5 Supplemental Sets (5x10 FSL):</strong> 5 sets of 10 reps @ FSL (e.g., 65% of TM) or a set weight</td>
+<td align="left"><strong>1.</strong> Weighted Dips (10+ reps) <br> <strong>2.</strong> Weighted Chins/Pull-ups (10+ reps)<br><strong>(Alternate 1 &amp; 2 after each Squat set)</strong></td>
+<td align="left">Complete entire lifting session in <strong>45 minutes</strong>. Focus on pushing the assistance work harder in this phase.</td>
+</tr>
+<tr>
+<td align="left"><strong>Wed</strong> (Example: Bench Press)</td>
+<td align="left"><strong>Bench Press</strong></td>
+<td align="left"><strong>6 Main Sets (5&#39;s PRO style):</strong> (e.g., Week 1 percentages from Phase 1) <br> <strong>5 Supplemental Sets (5x10 FSL):</strong> 5 sets of 10 reps @ FSL (e.g., 65% of TM) or a set weight</td>
+<td align="left"><strong>1.</strong> DB Squat (10+ reps) <br> <strong>2.</strong> DB SLDL w/shrug (10+ reps)<br><strong>(Alternate 1 &amp; 2 after each Bench Press set)</strong></td>
+<td align="left">Same as Monday.</td>
+</tr>
+<tr>
+<td align="left"><strong>Fri</strong> (Example: Deadlift)</td>
+<td align="left"><strong>Deadlift</strong></td>
+<td align="left"><strong>6 Main Sets (5&#39;s PRO style):</strong> (e.g., Week 1 percentages from Phase 1) <br> <strong>5 Supplemental Sets (5x10 FSL):</strong> 5 sets of 10 reps @ FSL (e.g., 65% of TM) or a set weight</td>
+<td align="left"><strong>1.</strong> Weighted Dips (10+ reps) <br> <strong>2.</strong> Weighted Chins/Pull-ups (10+ reps)<br><strong>(Alternate 1 &amp; 2 after each Deadlift set)</strong></td>
+<td align="left">Same as Monday.</td>
+</tr>
+<tr>
+<td align="left"><strong>Daily</strong></td>
+<td align="left">N/A</td>
+<td align="left">N/A</td>
+<td align="left"><strong>Face Pulls or Band Pull-aparts</strong> (100-200 reps total)</td>
+<td align="left">These should be performed every day or on every training day.</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="phase-3-peakpr-cycle-1-cycle">Phase 3: Peak/PR Cycle (1 Cycle)</h3>
+<p>This final phase integrates PR (Personal Record) sets, allowing for maximal effort on the final main lift set while maintaining the conditioning and volume emphasis from the assistance work.</p>
+<ul>
+<li><strong>Schedule:</strong> 3 days per week (Monday, Wednesday, Friday).</li>
+<li><strong>Main Lifts:</strong> Squat, Bench Press, Deadlift.</li>
+<li><strong>Programming:</strong> Main lifts use the standard 5/3/1 structure with a PR set (as many reps as possible on the final set). This is followed by 5 sets of 5 reps at the First Set Last (FSL) percentage.</li>
+<li><strong>TM:</strong> Increase your TM from Phase 2 (e.g., if Part 2 ended at 305lbs TM, use 310lbs for this phase).</li>
+<li><strong>Assistance:</strong> Remains the same as prior phases (supersetting, alternating exercises with 10+ reps).</li>
+<li><strong>Additional Assistance:</strong> 100-200 reps of <strong>Face Pulls or Band Pull-aparts</strong> are recommended daily or on training days. No other assistance work.</li>
+</ul>
+<p><strong>Sample Week 1 Workout Structure for Phase 3 (Apply percentages to your increased TM):</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">Day</th>
+<th align="left">Main Lift</th>
+<th align="left">Main Lift Sets &amp; Reps (Standard 5/3/1 + PR set + 5x5 FSL)</th>
+<th align="left">Assistance (Superset with each Main Lift set, alternating)</th>
+<th align="left">Notes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>Mon</strong> (Example: Squat)</td>
+<td align="left"><strong>Squat</strong></td>
+<td align="left"><strong>Standard 5/3/1:</strong> <br> Week 1: 5 reps @ 65%, 5 reps @ 75%, <strong>5+ reps @ 85% (PR Set)</strong> <br> Week 2: 3 reps @ 70%, 3 reps @ 80%, <strong>3+ reps @ 90% (PR Set)</strong> <br> Week 3: 5 reps @ 75%, 3 reps @ 85%, <strong>1+ rep @ 95% (PR Set)</strong> <br> <strong>5 Supplemental Sets (5x5 FSL):</strong> 5 sets of 5 reps @ FSL (e.g., 65% for Week 1)</td>
+<td align="left"><strong>1.</strong> Weighted Dips (10+ reps) <br> <strong>2.</strong> Weighted Chins/Pull-ups (10+ reps)<br><strong>(Alternate 1 &amp; 2 after each Squat set)</strong></td>
+<td align="left">Complete entire lifting session in <strong>45 minutes</strong>. The PR set is about achieving a personal record or specific goal for the day, not necessarily an &quot;as many reps as you can&quot; (AMRAP) set. It should be a strong, fast effort.</td>
+</tr>
+<tr>
+<td align="left"><strong>Wed</strong> (Example: Bench Press)</td>
+<td align="left"><strong>Bench Press</strong></td>
+<td align="left"><strong>Standard 5/3/1:</strong> (Percentages and rep scheme as described for Squat above) <br> <strong>5 Supplemental Sets (5x5 FSL):</strong> 5 sets of 5 reps @ FSL (e.g., 65% for Week 1)</td>
+<td align="left"><strong>1.</strong> DB Squat (10+ reps) <br> <strong>2.</strong> DB SLDL w/shrug (10+ reps)<br><strong>(Alternate 1 &amp; 2 after each Bench Press set)</strong></td>
+<td align="left">Same as Monday.</td>
+</tr>
+<tr>
+<td align="left"><strong>Fri</strong> (Example: Deadlift)</td>
+<td align="left"><strong>Deadlift</strong></td>
+<td align="left"><strong>Standard 5/3/1:</strong> (Percentages and rep scheme as described for Squat above) <br> <strong>5 Supplemental Sets (5x5 FSL):</strong> 5 sets of 5 reps @ FSL (e.g., 65% for Week 1)</td>
+<td align="left"><strong>1.</strong> Weighted Dips (10+ reps) <br> <strong>2.</strong> Weighted Chins/Pull-ups (10+ reps)<br><strong>(Alternate 1 &amp; 2 after each Deadlift set)</strong></td>
+<td align="left">Same as Monday. While you should push this set, be cognizant when your form breaks down and stop the set.</td>
+</tr>
+<tr>
+<td align="left"><strong>Daily</strong></td>
+<td align="left">N/A</td>
+<td align="left">N/A</td>
+<td align="left"><strong>Face Pulls or Band Pull-aparts</strong> (100-200 reps total)</td>
+<td align="left">These should be performed every day or on every training day.</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="after-completing-krypteia">After Completing Krypteia</h3>
+<p>Once you complete all phases, you can choose to move to another program or repeat Krypteia. If repeating, Jim Wendler suggests you can omit Part 1 and start with Part 2, choosing an appropriate training max. The program works well and often leads to increased size in the legs, glutes, upper back, and shoulders, and can also lead to leanness even without a specific fat-loss diet. The key to success is pushing the assistance work and maintaining discipline.</p>
+
+    </main>
+</body>
+</html>
