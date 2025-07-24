@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Previously Processed</title>
+    <style>
+        /* === SYSTEM THEME DETECTION === */
+        :root {
+            /* Light theme colors */
+            --bg-primary: #f0f0f0;
+            --bg-secondary: #e0e0e0;
+            --bg-window: #ffffff;
+            --text-primary: #000000;
+            --text-secondary: #666666;
+            --border-color: #c0c0c0;
+            --accent-color: #0078d4;
+            --hover-bg: #e8f4fd;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+
+        /* Dark theme colors (activated by system preference) */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-primary: #1a1a1a;
+                --bg-secondary: #2d2d2d;
+                --bg-window: #252525;
+                --text-primary: #ffffff;
+                --text-secondary: #b0b0b0;
+                --border-color: #404040;
+                --accent-color: #4fc3f7;
+                --hover-bg: #333333;
+                --shadow: rgba(0, 0, 0, 0.3);
+            }
+        }
+
+        /* === BASE STYLES === */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        /* === MAIN CONTAINER === */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--bg-window);
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            box-shadow: 0 4px 12px var(--shadow);
+            overflow: hidden;
+        }
+
+        /* === TITLE BAR === */
+        .title-bar {
+            background: var(--bg-secondary);
+            padding: 12px 16px;
+            border-bottom: 2px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .window-controls {
+            display: flex;
+            gap: 6px;
+        }
+
+        .control-btn {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 1px solid var(--border-color);
+        }
+
+        .close { background: #ff5f57; }
+        .minimize { background: #ffbd2e; }
+        .maximize { background: #28ca42; }
+
+        .title {
+            font-weight: bold;
+            font-size: 14px;
+            margin-left: 12px;
+        }
+
+        /* === CONTENT AREA === */
+        .content {
+            padding: 24px;
+        }
+
+        .header {
+            margin-bottom: 32px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+
+        .header .subtitle {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        /* === FILE LISTING === */
+        .file-listing {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 16px;
+        }
+
+        .listing-header {
+            display: grid;
+            grid-template-columns: 1fr auto auto;
+            gap: 16px;
+            padding: 8px 12px;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 3px;
+            margin-bottom: 8px;
+            font-weight: bold;
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .file-item {
+            display: grid;
+            grid-template-columns: 1fr auto auto;
+            gap: 16px;
+            padding: 10px 12px;
+            border-radius: 3px;
+            transition: background-color 0.2s ease;
+            text-decoration: none;
+            color: var(--text-primary);
+            border-bottom: 1px solid transparent;
+        }
+
+        .file-item:hover {
+            background: var(--hover-bg);
+            border-color: var(--border-color);
+        }
+
+        .file-name {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+        }
+
+        .file-icon {
+            font-size: 16px;
+        }
+
+        .file-type,
+        .file-size {
+            font-size: 12px;
+            color: var(--text-secondary);
+            white-space: nowrap;
+        }
+
+        /* === FOOTER === */
+        .footer {
+            margin-top: 32px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        /* === RESPONSIVE DESIGN === */
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+
+            .content {
+                padding: 16px;
+            }
+
+            .listing-header,
+            .file-item {
+                grid-template-columns: 1fr;
+                gap: 4px;
+            }
+
+            .file-type,
+            .file-size {
+                text-align: left;
+                margin-left: 24px;
+            }
+
+            .header h1 {
+                font-size: 20px;
+            }
+        }
+
+        /* === ACCESSIBILITY === */
+        .file-item:focus {
+            outline: 2px solid var(--accent-color);
+            outline-offset: -2px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .file-item {
+                transition: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Title Bar (like old OS windows) -->
+        <div class="title-bar">
+            <div class="window-controls">
+                <div class="control-btn close"></div>
+                <div class="control-btn minimize"></div>
+                <div class="control-btn maximize"></div>
+            </div>
+            <div class="title">File Manager - Previously Processed</div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="content">
+            <div class="header">
+                <h1>Previously Processed</h1>
+                <div class="subtitle">Document Archive • Ready for Access</div>
+            </div>
+
+            <div class="file-listing">
+                <div class="listing-header">
+                    <div>Name</div>
+                    <div>Type</div>
+                    <div>Size</div>
+                </div>
+
+                <!-- 
+                === ADD NEW FILES HERE ===
+                To add a new file, copy the structure below and update:
+                1. href="your-file-name.html"
+                2. The display name in the file-name span
+                3. Optionally update file-type and file-size
+                -->
+
+                <a href="travel_reads_july_23__2025.html" class="file-item">
+                    <div class="file-name">
+                        <span class="file-icon">📄</span>
+                        <span>Travel Reads July 23, 2025</span>
+                    </div>
+                    <div class="file-type">HTML</div>
+                    <div class="file-size">Document</div>
+                </a>
+
+                <a href="rpm__reps_per_minute__program__llm_reference_document.html" class="file-item">
+                    <div class="file-name">
+                        <span class="file-icon">📋</span>
+                        <span>RPM (Reps Per Minute) Program Reference</span>
+                    </div>
+                    <div class="file-type">HTML</div>
+                    <div class="file-size">Reference</div>
+                </a>
+
+                <a href="krypteia_program__comprehensive_reference_document.html" class="file-item">
+                    <div class="file-name">
+                        <span class="file-icon">📚</span>
+                        <span>Krypteia Program Comprehensive Reference</span>
+                    </div>
+                    <div class="file-type">HTML</div>
+                    <div class="file-size">Guide</div>
+                </a>
+
+                <!-- 
+                === TEMPLATE FOR NEW FILES ===
+                <a href="your-new-file.html" class="file-item">
+                    <div class="file-name">
+                        <span class="file-icon">📄</span>
+                        <span>Your File Display Name</span>
+                    </div>
+                    <div class="file-type">HTML</div>
+                    <div class="file-size">Type</div>
+                </a>
+                -->
+            </div>
+
+            <div class="footer">
+                3 items • Last updated: July 2025
+            </div>
+        </div>
+    </div>
+</body>
+</html>
